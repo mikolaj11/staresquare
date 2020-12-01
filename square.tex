@@ -1,0 +1,1017 @@
+\documentclass[submission]{FPSAC2021}
+
+\usepackage[utf8]{inputenc}
+\usepackage[polish, english]{babel}
+\usepackage[backend=bibtex, url = false, doi=false]{biblatex}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage{pgfplots}
+\usepackage[labelfont={normalsize}]{caption,subfig}
+\usepackage{amsmath,amssymb, amsthm}
+\usepackage{float}
+\usepackage[backend=bibtex]{biblatex}
+\usepackage[backgroundcolor=yellow]{todonotes}
+\usepackage{cleveref}
+\usepackage[normalem]{ulem}
+
+\bibliography{square.bib}
+
+\newtheorem{thm}{Theorem}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{conjecture}{Goulden--Rattan conjecture}
+\newtheorem{con}{Conjecture}
+
+\DeclareMathOperator{\degg}{deg}
+\DeclareMathOperator{\odd}{odd}
+\DeclareMathOperator{\even}{even}
+\DeclareMathOperator{\rest}{rest}
+
+\newcommand{\nast}{\sigma}
+
+\newcommand{\lewodd}[4]
+{
+	\draw[color=#4] [densely dashed] (#1) to [bend left=#3] (#2);
+}
+
+\newcommand{\prawolewodd}[4]
+{
+	\lewodd{#1}{$.5*(#1)+.5*(#2)$}{#3}{#4}
+	\lewodd{#2}{$.5*(#1)+.5*(#2)$}{#3}{#4}
+}
+
+\newcommand{\torus}[2]
+{
+
+	\centering
+	\subfloat[]
+	{
+		\begin{tikzpicture}[scale=#1]
+		\coordinate (x) at (-5,-1);
+		\coordinate (y) at (-2,-2);
+		\coordinate (z) at (2,-2);
+		\coordinate (t) at (5,-1);
+		\coordinate (p) at (-5,2);
+		\coordinate (q) at (0,3);
+		\coordinate (r) at (5,2);
+		\coordinate (yz) at (-.7,-.85);
+		\coordinate (zy) at (1.2,-3.9);
+		\coordinate (gora) at (0,.2);
+		\coordinate (dol) at (0,-1.1);
+		\draw[color=black, ultra thick] (0,0) ellipse (8 and 4);
+		\draw[color=black, ultra thick] (5,1) to [bend left=40] (-5,1);
+		\draw[color=black, ultra thick] (3.5,0) to [bend right=40] (-3.5,0);
+		\prosto{x}{y}{black}
+		\prosto{y}{z}{black}
+		\prosto{z}{t}{black}
+		\lewo{y}{yz}{30}{blue}
+		\lewo{z}{zy}{40}{blue}
+		\prawolewodd{zy}{yz}{40}{blue}
+		\lewo{x}{p}{60}{black}
+		\lewo{p}{r}{25}{black}
+		\lewo{r}{t}{60}{black}
+		\wierzcholek{x}{black}{b_2}{gora}
+		\wierzcholek{y}{white}{w_1}{dol}
+		\wierzcholek{z}{black}{b_1}{gora}
+		\wierzcholek{t}{white}{w_2}{dol}
+		\end{tikzpicture}
+		\label{fig:rystorus}
+	}
+	\hfill
+	\subfloat[]
+	{
+		\begin{tikzpicture}[scale=#2]
+			\punkty		
+			\prosto{a}{b}{black}
+			\prosto{b}{c}{black}
+			\prosto{c}{d}{black}
+			\prosto{d}{a}{black}
+			\lewoprawo{c}{d}{70}{blue}
+			\wierzcholek{a}{black}{b_2}{gora}
+			\wierzcholek{c}{black}{b_1}{dol}
+			\wierzcholek{b}{white}{w_2}{gora}
+			\wierzcholek{d}{white}{w_1}{gora}
+		\end{tikzpicture}
+		\label{fig:rysnormal}
+	}	
+}
+
+\newcommand{\punkty}
+{
+	\coordinate (a) at (0,2);
+	\coordinate (b) at (1.4,0);
+	\coordinate (zab) at (2,0);
+	\coordinate (c) at (0,-2);
+	\coordinate (d) at (-1.4,0);
+	\coordinate (zad) at (-2,0);
+	\coordinate (gora) at (0,.2);
+	\coordinate (dol) at (0,-.9);
+}
+
+\newcommand{\prosto}[3]
+{
+	\draw[color=#3] (#1) to [bend left=0] (#2);
+}
+
+\newcommand{\lewo}[4]
+{
+	\draw[color=#4] (#1) to [bend left=#3] (#2);
+}
+
+\newcommand{\prawo}[4]
+{
+	\draw[color=#4] (#1) to [bend right=#3] (#2);
+}
+
+\newcommand{\prawolewo}[4]
+{
+	\prawo{#1}{$.5*(#1)+.5*(#2)$}{#3}{#4}
+	\lewo{$.5*(#1)+.5*(#2)$}{#2}{#3}{#4}
+}
+
+\newcommand{\lewoprawo}[4]
+{
+	\lewo{#1}{$.5*(#1)+.5*(#2)$}{#3}{#4}
+	\prawo{$.5*(#1)+.5*(#2)$}{#2}{#3}{#4}
+}
+
+\newcommand{\szeroko}[4]
+{
+	\draw[color=#4] (#1) to [bend left=45] (#3);
+	\draw[color=#4] (#2) to [bend right=45] (#3);
+}
+
+\newcommand{\waskoszeroko}[4]
+{
+	\draw[color=#4] (#1) to [bend left=0] (#3);
+	\draw[color=#4] (#2) to [bend right=45] (#3);
+}
+
+\newcommand{\waskoszerokodd}[4]
+{
+	\draw[color=#4] [densely dashed] (#1) to [bend left=0] (#3);
+	\draw[color=#4] [densely dashed] (#2) to [bend right=45] (#3);
+}
+
+
+\newcommand{\prostodd}[3]
+{
+	\draw[color=#3] (#1) [densely dashed] to [bend left=0] (#2);
+}
+
+\newcommand{\bialy}[1]
+{
+	\draw[black,fill=white] (#1) circle (5pt);
+}
+
+\newcommand{\wierzcholek}[4]
+{
+\draw[black,fill=#2] (#1) circle (5pt) node[above] at ($(#1)+(#4)$) {\tiny \large $#3$};
+}
+
+\newcommand{\rysodd}[1]
+{	
+	\centering
+	\subfloat[]
+	{
+		\begin{tikzpicture}[scale=#1]
+			\punkty		
+			\prosto{a}{b}{black}
+			\prosto{b}{c}{red}
+			\prosto{c}{d}{red}
+			\prosto{d}{a}{black}
+			\prawolewo{c}{d}{45}{red}
+			\wierzcholek{a}{black}{b_2}{gora}
+			\wierzcholek{c}{black}{b_1}{dol}
+			\wierzcholek{b}{white}{w_2}{gora}
+			\wierzcholek{d}{white}{w_1}{gora}
+		\end{tikzpicture}
+		\label{fig:rysodda}
+	}
+	\hfill
+	\subfloat[]
+	{
+		\begin{tikzpicture}[scale=#1]
+			\punkty		
+			\prosto{a}{b}{black}
+			\szeroko{$.5*(a)+.5*(b)$}{c}{$(zab)+(0.0,-0.2)$}{red}
+			\prosto{c}{$.5*(a)+.5*(d)$}{red}
+			\prosto{d}{a}{black}
+			\prawolewo{c}{$.5*(a)+.5*(d)$}{35}{red}
+			\wierzcholek{a}{black}{b_2}{gora}
+			\wierzcholek{c}{black}{b_1}{dol}
+			\wierzcholek{b}{white}{w_2}{gora}
+			\wierzcholek{d}{white}{w_1}{gora}
+		\end{tikzpicture}
+		\label{fig:rysoddb}
+	}
+	\hfill
+	\subfloat[]
+	{
+		\begin{tikzpicture}[scale=#1]
+			\punkty		
+			\prosto{a}{b}{black}
+			\szeroko{a}{c}{zab}{red}
+			\prosto{c}{a}{red}
+			\prosto{d}{a}{black}
+			\prawolewo{c}{a}{25}{red}
+			\wierzcholek{a}{black}{b_2}{gora}
+			\wierzcholek{c}{black}{b_1}{dol}
+			\wierzcholek{b}{white}{w_2}{gora}
+			\wierzcholek{d}{white}{w_1}{gora}
+		\end{tikzpicture}
+		\label{fig:rysoddc}
+	}
+	\hfill
+	\subfloat[]
+	{
+		\begin{tikzpicture}[scale=#1]
+			\punkty		
+			\prosto{a}{b}{black}
+			\szeroko{a}{c}{zab}{red}
+			\prosto{c}{a}{red}
+			\prosto{d}{a}{black}
+			\prawolewo{c}{a}{25}{red}
+			\wierzcholek{a}{black}{b}{gora}
+			\wierzcholek{c}{white}{w_3}{dol}
+			\wierzcholek{b}{white}{w_2}{gora}
+			\wierzcholek{d}{white}{w_1}{gora}
+		\end{tikzpicture}
+		\label{fig:rysoddd}
+	}
+}
+
+\newcommand{\ryseven}[1]
+{	
+	\centering
+	\subfloat[]
+	{
+		\begin{tikzpicture}[scale=#1]
+			\punkty		
+			\prosto{a}{b}{red}
+			\prosto{b}{c}{black}
+			\prosto{c}{d}{black}
+			\prosto{d}{a}{red}
+			\prawolewo{c}{d}{55}{black}
+			\wierzcholek{a}{black}{b_2}{gora}
+			\wierzcholek{c}{black}{b_1}{dol}
+			\wierzcholek{b}{white}{w_2}{gora}
+			\wierzcholek{d}{white}{w_1}{gora}
+		\end{tikzpicture}
+		\label{fig:rysevena}
+	}
+	\hfill
+	\subfloat[]
+	{
+		\begin{tikzpicture}[scale=#1]
+			\punkty		
+			\prosto{a}{$.5*(b)+.5*(c)$}{red}
+			\prosto{b}{c}{black}
+			\prosto{c}{d}{black}
+			\szeroko{$.5*(c)+.5*(d)+(0.4,-0.0)$}{a}{$(zad)+(0.0,0.2)$}{red}
+			\prawo{c}{d}{30}{black}
+			\wierzcholek{a}{black}{b_2}{gora}
+			\wierzcholek{c}{black}{b_1}{dol}
+			\wierzcholek{b}{white}{w_2}{gora}
+			\wierzcholek{d}{white}{w_1}{gora}
+		\end{tikzpicture}
+		\label{fig:rysevenb}
+	}
+	\hfill
+	\subfloat[]
+	{
+		\begin{tikzpicture}[scale=#1]
+			\punkty		
+			\prosto{b}{c}{black}
+			\lewo{c}{d}{35}{black}
+			\lewo{a}{c}{20}{red}
+			\prawo{a}{c}{40}{red}
+			\prawo{c}{d}{35}{black}
+			\wierzcholek{a}{black}{b_2}{gora}
+			\wierzcholek{c}{black}{b_1}{dol}
+			\wierzcholek{b}{white}{w_2}{gora}
+			\wierzcholek{d}{white}{w_1}{gora}
+		\end{tikzpicture}
+		\label{fig:rysevenc}
+	}
+	\hfill
+	\subfloat[]
+	{
+		\begin{tikzpicture}[scale=#1]
+			\punkty		
+			\prosto{b}{c}{black}
+			\lewo{c}{d}{35}{black}
+			\lewo{a}{c}{20}{red}
+			\prawo{a}{c}{40}{red}
+			\prawo{c}{d}{35}{black}
+			\wierzcholek{a}{white}{w_3}{gora}
+			\wierzcholek{c}{black}{b}{dol}
+			\wierzcholek{b}{white}{w_2}{gora}
+			\wierzcholek{d}{white}{w_1}{gora}
+		\end{tikzpicture}
+		\label{fig:rysevend}
+	}
+}
+
+\newcommand{\rysrest}[1]
+{	
+	\centering
+	\subfloat[]
+	{
+		\begin{tikzpicture}[scale=#1]
+			\punkty		
+			\prosto{a}{b}{black}
+			\prostodd{b}{c}{blue}
+			\prosto{c}{d}{red}
+			\prosto{d}{a}{black}
+			\prawolewo{c}{d}{55}{red}
+			\wierzcholek{a}{black}{b_2}{gora}
+			\wierzcholek{c}{black}{b_1}{dol}
+			\wierzcholek{b}{white}{w_2}{gora}
+			\wierzcholek{d}{white}{w_1}{gora}
+		\end{tikzpicture}
+		\label{fig:rysresta}
+	}
+	\hfill
+	\subfloat[]
+	{
+		\begin{tikzpicture}[scale=#1]
+			\punkty		
+			\prosto{a}{b}{black}
+			\waskoszerokodd{$.5*(a)+.5*(b)$}{c}{$.6*(b)+.4*(c)$}{blue}
+			\prosto{c}{$.5*(a)+.5*(d)$}{red}
+			\prosto{d}{a}{black}
+			\prawolewo{c}{$.5*(a)+.5*(d)$}{35}{red}
+			\wierzcholek{a}{black}{b_2}{gora}
+			\wierzcholek{c}{black}{b_1}{dol}
+			\wierzcholek{b}{white}{w_2}{gora}
+			\wierzcholek{d}{white}{w_1}{gora}
+		\end{tikzpicture}
+		\label{fig:rysrestb}
+	}
+	\hfill
+	\subfloat[]
+	{
+		\begin{tikzpicture}[scale=#1]
+			\punkty		
+			\prosto{a}{b}{black}
+			\waskoszerokodd{a}{c}{$.6*(b)+.4*(c)$}{blue}
+			\prosto{c}{a}{red}
+			\prosto{d}{a}{black}
+			\prawolewo{c}{a}{25}{red}
+			\wierzcholek{a}{black}{b_2}{gora}
+			\wierzcholek{c}{black}{b_1}{dol}
+			\wierzcholek{b}{white}{w_2}{gora}
+			\wierzcholek{d}{white}{w_1}{gora}
+		\end{tikzpicture}
+		\label{fig:rysrestc}
+	}
+	\hfill
+	\subfloat[]
+	{
+		\begin{tikzpicture}[scale=#1]
+			\punkty		
+			\prosto{a}{b}{black}
+			\waskoszerokodd{a}{c}{$.6*(b)+.4*(c)$}{blue}
+			\prosto{c}{a}{red}
+			\prosto{d}{a}{black}
+			\prawolewo{c}{a}{25}{red}
+			\wierzcholek{a}{black}{b}{gora}
+			\wierzcholek{c}{white}{w_3}{dol}
+			\wierzcholek{b}{white}{w_2}{gora}
+			\wierzcholek{d}{white}{w_1}{gora}
+		\end{tikzpicture}
+		\label{fig:rysrestd}
+	}
+}
+
+\newcommand{\sliding}[1]
+{
+	\centering
+	\subfloat[]
+	{
+		\begin{tikzpicture}[scale=#1]
+			\punkty		
+			\prosto{d}{a}{red}
+			\lewoprawo{d}{a}{40}{red}
+			\lewo{a}{d}{65}{red}
+			\lewoprawo{b}{d}{35}{black}
+			\prawo{d}{$(0,0)$}{35}{black}
+			\prosto{$(0,0)$}{$(1,0.6)$}{black}
+			\lewo{$(1,0.6)$}{b}{90}{black}
+			\lewo{b}{d}{65}{black}
+			\wierzcholek{a}{black}{M}{gora}
+			\wierzcholek{b}{black}{}{gora}
+			\wierzcholek{d}{black}{A}{$(dol)+(-0.2,0.0)$}
+		\end{tikzpicture}
+		\label{fig:rysprzed}
+	}
+	\subfloat[]
+	{
+		\begin{tikzpicture}[scale=#1]
+			\punkty		
+			\prosto{$(d)+(0.7,0.23)$}{a}{red}
+			\lewoprawo{$(d)+(0.7,0.23)$}{a}{30}{red}
+			\lewo{a}{$(d)+(0.7,-0.23)$}{45}{red}
+			\lewoprawo{b}{d}{35}{black}
+			\prawo{d}{$(0,0)$}{35}{black}
+			\prosto{$(0,0)$}{$(1,0.6)$}{black}
+			\lewo{$(1,0.6)$}{b}{90}{black}
+			\lewo{b}{d}{65}{black}
+			\wierzcholek{a}{black}{M}{gora}
+			\wierzcholek{b}{black}{}{gora}
+			\wierzcholek{d}{black}{A}{$(dol)+(-0.2,0.0)$}
+		\end{tikzpicture}
+		\label{fig:rysw}
+	}
+	\subfloat[]
+	{
+		\begin{tikzpicture}[scale=#1]
+			\punkty		
+			\prosto{b}{a}{red}
+			\lewoprawo{b}{a}{40}{red}
+			\lewo{a}{b}{100}{red}
+			\lewoprawo{b}{d}{35}{black}
+			\prawo{d}{$(0,0)$}{35}{black}
+			\prosto{$(0,0)$}{$(1,0.6)$}{black}
+			\lewo{$(1,0.6)$}{b}{90}{black}
+			\lewo{b}{d}{65}{black}
+			\wierzcholek{a}{black}{M}{gora}
+			\wierzcholek{b}{black}{}{gora}
+			\wierzcholek{d}{black}{A}{$(dol)+(-0.2,0.0)$}
+		\end{tikzpicture}
+		\label{fig:ryspo}
+	}
+	\subfloat[]
+	{
+		\begin{tikzpicture}[scale=#1]
+			\punkty		
+			\lewoprawo{b}{d}{35}{black}
+			\prawo{d}{$(0,0)$}{35}{black}
+			\prosto{$(0,0)$}{$(1,0.6)$}{black}
+			\lewo{$(1,0.6)$}{b}{90}{black}
+			\lewo{b}{d}{65}{black}
+			\wierzcholek{a}{black}{}{gora}
+			\wierzcholek{b}{black}{}{gora}
+			\wierzcholek{d}{black}{}{gora}
+			\draw[red,fill=black] (d) circle (0pt) node[above] at ($(d)+(-0.4,-0.3)$) {\tiny \small $1$};
+			\draw[red,fill=black] (d) circle (0pt) node[above] at ($(d)+(0.5,-0.3)$) {\tiny \small $5$};
+			\draw[red,fill=black] (d) circle (0pt) node[above] at ($(d)+(0.75,-0.73)$) {\tiny \small $3$};
+			\draw[red,fill=black] (b) circle (0pt) node[above] at ($(b)+(0.4,-0.3)$) {\tiny \small $6$};
+			\draw[red,fill=black] (b) circle (0pt) node[above] at ($(b)+(-0.35,-0.1)$) {\tiny \small $2$};
+			\draw[red,fill=black] (b) circle (0pt) node[above] at ($(b)+(-0.75,-0.72)$) {\tiny \small $4$};
+			\draw[red,fill=black] (a) circle (0pt) node[above] at ($(a)+(-0.50,-0.45)$) {\tiny \small $1'$};
+		\end{tikzpicture}
+		\label{fig:rysnum}
+	}
+}
+
+\title{Quadratic coefficients of Goulden--Rattan character polynomials}
+
+\author[Mikołaj Marciniak]{Mikołaj Marciniak\thanks{\href{mailto:marciniak@mat.umk.pl}{marciniak@mat.umk.pl}. Mikołaj Marciniak was partially supported by Narodowe Centrum Nauki, grant number 2017/26/A/ST1/00189.}\addressmark{1}}
+
+\address{\addressmark{1}Interdisciplinary Doctoral School “Academia Copernicana”, Faculty of Mathematics and Computer Science, Nicolaus Copernicus University in Toruń, ul.~Chopina 12/18, 87-100 Toruń, Poland}
+
+\received{\today}
+
+\abstract{ Goulden--Rattan polynomials give the exact value of the subdominant
+    part of the normalized characters of the symmetric groups in terms certain
+    quantities $(C_i)$ which describe the macroscopic shape of the Young diagram.
+    Goulden--Rattan positivity conjecture states that the coefficients of these
+    polynomials are positive rational numbers with small denominators. We prove a
+    special case of this conjecture for the coefficient of the quadratic term
+    $C_2^2$ by applying certain bijections involving maps (i.e., graphs drawn on
+    surfaces).}
+
+\keywords{characters of the symmetric groups, free cumulants, Kerov polynomials, Goulden--Rattan polynomials, maps}
+
+\begin{document}
+\maketitle
+\section{Introduction}
+
+A full version of this extended abstract will be available soon 
+as a separate paper \cite{Mar21}.
+
+\subsection{Normalized characters}
+
+If $k\leq n$ are natural numbers, then any permutation $\pi \in S_k$ can also be
+treated as an element of the larger symmetric group $S_n$ by adding $n-k$ additional
+fixpoints. For any permutation $\pi \in S_k$ and any irreducible representation
+$\rho^{\lambda}$ of the symmetric group $S_n$ which corresponds to the
+Young diagram $\lambda$, we define \emph{the normalized character}
+$$
+\Sigma_{\pi}(\lambda)
+= \begin{cases} 
+          n(n-1)\cdots(n-k+1)\frac{\operatorname{Tr}\rho^{\lambda}(\pi)}{\text{dimension of }\rho^{\lambda}} & \text{for } k \leq n,\\
+          0 & \text{otherwise.}
+\end{cases}
+$$
+Particularly interesting are the character values on the cycles, therefore we
+will use the shorthand notation
+$$\Sigma_{k}(\lambda)=\Sigma_{(1,2,\ldots,k)}(\lambda).$$
+
+\subsection{Free cumulants}
+
+\emph{The free cumulants} are an important tool of the free probability theory
+\cite{VDN92} and the random matrix theory \cite{Voi91}. 
+In the context of the representation theory of the symmetric groups they can be defined as follows, see \cite{Bia03}. For a Young diagram $\lambda$ we define its free cumulants $R_2(\lambda), R_3(\lambda), \ldots$ as
+$$R_k(\lambda)=\lim_{s\to\infty} \frac{1}{s^k}\Sigma_{k-1}(s\lambda),$$
+where the diagram $s\lambda$ is created from the diagram $\lambda$ by 
+dividing each box of $\lambda$ into a square $s\times s$. 
+
+The free cumulants are very helpful for studying asymptotic behaviour of the characters on a cycle with the length $k$ when the size of the Young diagram tends to infinity \cite{Bia98}.
+
+\subsection{Kerov character polynomials}
+
+Kerov formulated the following result: for each permutation $\pi$ and any Young
+diagram $\lambda$, the normalized character $\Sigma_{\pi}(\lambda)$ is equal to
+the value of some polynomial $K_{\pi}(R_2(\lambda), R_3(\lambda), \ldots)$
+(called now \emph{Kerov character polynomial}) with integer coefficients. The
+first published proof of this fact was provided by Biane \cite{Bia03}. The
+Kerov character polynomial is \emph{universal} because it does not depend on the
+choice of $\lambda$. We investigate the values of the characters on the cycles, therefore 
+for $\pi=(1, 2, \ldots, k)$ we use special simplified notation
+\begin{align}
+\label{kerpol}
+\Sigma_k=K_k(R_2, R_3, \ldots)
+\end{align}
+for such Kerov polynomials. The first few Kerov polynomials $K_k$ are as follows:
+\begin{align*}
+\Sigma_1&=R_2,\\
+\Sigma_2&=R_3,\\
+\Sigma_3&=R_4+R_2,\\
+\Sigma_4&=R_5+5R_3,\\
+\Sigma_5&=R_6+15R_4+5R_2^2+8R_2,\\
+\Sigma_6&=R_7+35R_5+35R_3R_2+84R_3, \\
+\Sigma_7&=R_8+180R_2+224R_2^2+14R_2^3+56R_3^2+469R_4+84R_2R_4+70R_6.
+%\Sigma_8&=3044R_3+2688R_2R_3+126R_2^2R_3+252R_3R_4+1869R_5+168R_2R_5+126R_7+R_9.
+\end{align*}
+
+Kerov conjectured that the coefficients of the polynomial $K_k$ are non-negative integers.
+Goulden and Rattan \cite{GR05} found an explicit formula for the coefficients of the Kerov
+polynomial $K_k$; unfortunately, their formula was complicated and did not give
+any combinatorial interpretation to the coefficients. Later, F\'{e}ray
+proved positivity \cite{Fer09} and together with Dołęga and Śniady found the
+combinatorial interpretation of the coefficients \cite{DFS10}.
+
+\subsection{Goulden--Rattan conjecture}
+
+Goulden and Rattan \cite{GR05} introduced a family of functions 
+$C_2,C_3,\dots$ on the set of Young diagrams given by
+\begin{align}
+\label{cformula}
+C_k=\sum_{\substack{j_2,j_3,\ldots \geq 0 \\ 2j_2+3j_3+\cdots=k}}
+(j_2+j_3+\cdots)!\prod_{i\geq 2} \frac{\big( (i-1)R_i\big)^{j_i}}{j_i!}
+\end{align}
+for $k\geq 2$.
+The aforementioned formula of Goulden and Rattan for the Kerov polynomials 
+was naturally expressed in terms of these 
+quantities $C_2,C_3,\dots$ \cite{GR05}. 
+More specifically, they constructed an explicit polynomial $L_k$ with
+rational coefficients such that 
+\begin{align}
+\label{grpol}
+\Sigma_k-R_{k+1}=L_k(C_2, C_3, \ldots).
+\end{align}
+These polynomials are called \emph{the Goulden--Rattan polynomials}. They formulated the following conjecture:
+\begin{conjecture}
+\label{hipotezaGR}
+The coefficients of the Goulden--Rattan polynomials are non-negative numbers. 
+\end{conjecture}
+The first few Goulden--Rattan polynomials are as follows \cite{GR05}:
+\begin{align*}
+\Sigma_1&-R_2=0\\
+\Sigma_2&-R_3=0\\
+\Sigma_3&-R_4=C_2,\\
+\Sigma_4&-R_5=\frac{5}{2}C_3,\\
+\Sigma_5&-R_6=5C_4+8C_2,\\
+\Sigma_6&-R_7=\frac{35}{4}C_5+42C_3,\\
+\Sigma_7&-R_8=14C_6+\frac{469}{3}C_4+\frac{203}{3}C_2^2+180C_2.
+%\Sigma_8&-R_9=21C_6+\frac{1869}{4}C_5+\frac{819}{2}C_3C_2+1522C_2.
+\end{align*}
+
+Linear coefficients of the Goulden--Rattan polynomial are non-negative, because
+they are equal to certain scaled coefficients of the Kerov polynomial:
+\[ [ C_j ] L_k=(j-1) [ R_j ] K_k. \]
+In this
+paper we will prove that the coefficient of $C_2^2$ is non-negative.
+Using the same methods we will prove in a separate paper \cite{Mar21} that 
+any square coefficients $[ C_i C_j ] L_k$ are non-negative. 
+The next step towards the proof of Goulden--Rattan conjecture would be understand 
+the cubic coefficients $ [ C_i C_j C_u ] L_k$; we hope that 
+our methods will still be applicable there, nevertheless there seem to be 
+some difficulties related to the inclusion-exclusion principle.
+
+\section{Coefficients of the Goulden--Rattan polynomial}
+
+\subsection{Maps}
+
+By \emph{a map} we will understand a bipartite graph drawn without intersections
+on an oriented and connected surface with minimal genus. The maps which we
+consider are \emph{bicolored}, i.e., each vertex is coloured black or white, with
+the edges connecting the vertices of the opposite colors. 
+An example of a map is shown in \cref{fig:mapa}.
+
+\begin{figure}
+\torus{0.65}{1.0}
+\caption
+{
+	\protect\subref{fig:rystorus} An example of a map with $4$ vertices and $5$ edges drawn on a torus.  \\
+	\protect\subref{fig:rysnormal} The same map drawn for simplicity on the plane. 
+}
+\label{fig:mapa}
+\end{figure}
+
+\emph{An expander} \cite[Appendix A.1]{Sni19} 
+ is a map with the following properties.
+\begin{itemize}
+
+\item It has one face and one edge (\emph{the root}) is decorated.
+
+\item Each black vertex has assigned a \emph{weight} which is a natural number.
+We assume that each non-empty proper subset of the set of black vertices has
+more white neighbours than the sum of its weights.
+
+\item The sum of all weights is equal to the number of white vertices.
+
+\end{itemize}
+The map from \cref{fig:mapa} is also the expander if each black vertex has weight $1$ (the root is not marked).
+
+Using the Euler characteristic we get
+\begin{align}
+\label{euler}
+2-2g=\chi=V-k+1
+\end{align}
+where $g$ denotes the genus of the surface and $V$ denotes the number of the vertices.
+
+Two following two theorems give a combinatorial interpretation to the linear
+and square coefficients of the Kerov character polynomials.
+
+\begin{theorem}
+\label{thm2}
+For all integers $l\geq2$ and $k\geq 1$ the coefficient $[R_l] K_k$ is equal to the number of expanders with $k$ edges, $l-1$ white vertices and one black vertex with the weight $l-1$.
+\end{theorem}
+
+\begin{theorem}
+\label{thm4} 
+
+For all integers $l_1, l_2\geq 2$ and $k\geq 1$ the coefficient
+$[R_{l_1} R_{l_2}] K_k$ is equal to the number of expanders with $k$ edges,
+$l_1+l_2-2$ white vertices and two black vertices with weights $l_1-1$ and
+$l_2-1$.
+\end{theorem}
+
+\subsection{Relationship between coefficients of Goulden--Rattan polynomials 
+and coefficients of Kerov polynomials}
+
+The formula \eqref{cformula} allows us to express $(C_i)$ in terms of free cumulants;
+we see that the coefficients of the terms $R_i R_j$ and $R_{i+j}$ in the expressions
+$C_{i} C_{j}$ and $C_{i+j}$ are given by
+\begin{align*}
+C_i C_j &= (i-1)(j-1) R_i R_j + 0  R_{i+j} + \text{(sum of other terms)},\\
+C_{i+j} &=2(i-1)(j-1)R_iR_j+(i+j-1)R_{i+j}+\text{(sum of other terms)} 
+\qquad \text{for $i\neq j$.}
+\end{align*}
+Moreover, if we consider the terms $C_{i_1} C_{i_2}\cdots C_{i_t}$, then 
+only the terms $C_i C_j$ and $C_{i+j}$ contain the expression $R_i R_j$ or $R_{i+j}$.
+It follows that the quadratic coefficients of the Goulden--Rattan polynomial are 
+related to the coefficients of the Kerov polynomial via
+\begin{align*}
+\frac{\partial^2L_k}{\partial{C_i}\partial{C_j}}\Bigg|_{0=C_1=C_2=\cdots}
+&=\frac{1}{(i-1)(j-1)}\frac{\partial^2K_k}{\partial{R_i}\partial{R_j}}\Bigg|_{0=R_1=R_2=\cdots}
+-2\frac{\partial L_k}{\partial{C_{i+j}}}\Bigg|_{0=C_1=C_2=\cdots}\\
+&=\frac{1}{(i-1)(j-1)}\frac{\partial^2K_k}{\partial{R_i}\partial{R_j}}\Bigg|_{0=R_1=R_2=\cdots}
+-\frac{2}{(i+j-1)}\frac{\partial K_k}{\partial{R_{i+j}}}\Bigg|_{0=R_1=R_2=\cdots};
+\end{align*}
+note that the the above equality is valid also in the case $i=j$. Thus
+\begin{align}
+\label{formula}
+[C_j^2]L_k &=\frac{1}{(j-1)^2}[R_j^2]K_k-\frac{1}{2j-1}[R_{2j}]K_k \\
+\intertext{and}
+[C_iC_j]L_k &=\frac{1}{(i-1)(j-1)}[R_iR_j]K_k-\frac{2}{i+j-1}[R_{i+j}]K_k
+\qquad \text{for $i\neq j$.}
+\end{align}
+
+\pagebreak[1] 
+
+\section{The main result} 
+
+Let $Y_k(u)$ denote the set of expanders with $k$
+edges, $u-1$ white vertices and one black vertex. 
+Let $X_k(i, j)$ denote the set of expanders with $k$ edges, $i+j-2$ white
+vertices and two black vertices with weights $i-1$ and $j-1$. Using  \cref{thm2}
+and \cref{thm4} we can also reformulate the Goulden--Rattan conjecture
+for the square coefficients in the expander language, as follows.
+
+\begin{con} 
+    \label{con:GJ2}
+Let $i, j$ be natural numbers. Then 
+$$(2j-1)\ \left\| X_k(j, j) \right\| \geq (j-1)^2\ \left\| Y_k(2j) \right\|$$
+and
+$$(i+j-1)\ \left\| X_k(i, j) \right\| \geq 2(i-1)(j-1)\ \left\| Y_k(i+j) \right\|$$
+for any natural number $k$. 
+\end{con}
+These inequalities are equivalent to the positivity 
+of the coefficients $[C_j^2] L_k$ and $[C_i C_j] L_k$. 
+In this text we prove the positivity in the special case $i=j=2$. 
+We postpone the proof of \cref{con:GJ2} in its general form to the forthcoming full version of this paper.
+
+Using \cref{formula} 
+we can calculate several examples of the coefficient at $C_2^2$ of 
+the Goulden--Rattan polynomials
+\begin{align*}
+\begin{split}
+[C_2^2] L_4 &=0-0=0,\\
+[C_2^2] L_6 &=0-0=0, \\
+[C_2^2] L_8 &=0-0=0,
+\end{split}
+\begin{split}
+[C_2^2] L_5 &=5-\frac{1}{3}15=0,\\
+[C_2^2] L_7 &=224-\frac{1}{3}469=\frac{203}{3}.\\
+\end{split}
+\end{align*}
+Note that if $k$ is even then $[C_2^2] L_k=0$ because there does not exists an expander with $4$ vertices and an odd number of edges, since
+$2-2g=2j-k+1$ by \cref{euler}. Thus we can assume that the number of edges $k$ is odd. 
+
+Let 
+\begin{align}
+\label{xdef}
+X_k &= X_k(2, 2), \\
+\label{ydef}
+Y_k &= Y_k(4).
+\end{align}
+The set $X_k$ consists of expanders with $2$ black vertices and $2$ white vertices
+such that each black vertex is connected with the both white vertices;
+each black vertex necessarily has weight equal to $1$.
+The set $Y_k$ consists of expanders with one black vertex (which necessarily has the weight $3$) connected
+with all $3$ white vertices. From this moment the weights of the black vertices
+will not be used anymore.
+
+In order to prove \cref{con:GJ2} in the special case $i=j=2$ we will show that 
+$$3\big\|X_k\big\| \geq \big\|Y_k\big\|.$$
+
+\subsection{Edge sliding}
+
+We define \emph{the right-handed edge sliding} on a graph as follows. We start
+from a graph $G$ drawn on a surface with selected the main
+vertex $M$ and the set of auxiliary vertices $A$. We assume that no exists any edge between the auxiliary vertices. We assume also
+that for each $A_i \in A$, exists at least one vertex (different from $M$) which is
+connected with the auxiliary vertex $A_i$. 
+
+By \emph{the special edges} we will understand the edges connecting $M$ and $A$;
+by \emph{the rest of the graph $G'$} we will understand the graph with the
+special edges removed. A \emph{corner} of $G'$ is an inner angle in a vertex
+between two neighboring edges of $G'$. We denote by $\nast$ the permutation on the set
+of corners of $G'$ such that each cycle of $\nast$ corresponds to the corners
+which belong to some face of $G'$, arranged in the 
+cyclic order
+(i.e., by going along the boundary of the face of $G'$, touching it with the
+right-hand side). 
+For the example on \cref{fig:rysnum} we have $\nast=(1')(1,2,3,4,5,6)$.
+\begin{figure}
+\sliding{0.95}
+\caption
+{
+	An example of the edge sliding.
+	\protect\subref{fig:rysprzed} A graph with special edges coloured red.
+	\protect\subref{fig:rysw} The graph during the right-handed edge sliding.
+	\protect\subref{fig:ryspo} The graph after the edge sliding.
+	\protect\subref{fig:rysnum} The graph without the special edges with
+	numbered order of the corners.
+}
+\label{fig:sliding}
+\end{figure}
+Each corner of a vertex $A_i \in A$ can contain some special edges. 
+The output of the right-handed edge sliding applied 
+to the vertices $A_i \in A$ is defined as the graph $G$ 
+in which these special edges from each such a corner $c$ 
+of the vertex $A_i$ are shifted to the next corner $\nast(c)$
+(see \cref{fig:sliding} for an example).
+
+\medskip
+
+Similarly, we define \emph{the left-handed edge sliding} 
+in which the special edges in a corner $c$ are shifted to the corner $\nast^{-1}(c)$. 
+
+If the main vertex $M$ have not common neighbours with any vertex $A_i$,
+then the right-handed edge sliding is the inverse of the left-handed edges
+sliding. In addition, the edge sliding on a graph does not change the
+number of faces of this graph.  
+
+\subsection{The set $X_k$ of maps} 
+
+We consider any map from the set $X_k$ of maps. Any such a
+map has one face and an odd number $k$ of edges. We denote the black
+vertices by $b_1, b_2$ and the white vertices by $w_1, w_2$. There is
+at least one edge between each pair of the vertices of different colours.
+Of course, $\degg(b_1)+\degg(b_2)=k$ is an odd number. Without loss of generality 
+we may assume that $\degg(b_1)>0$ is odd number and $\degg(b_2)>0$ is even.
+Let $k_1, k_2 > 0$ denote the numbers of edges which connect
+the vertex $b_1$ with the vertices $w_1, w_2$, respectively. 
+Of course $k_1+k_2=\degg(b_1)$ is an odd number. Without loss of the generality 
+we may assume that $k_1$ is
+even and $k_2$ is odd. The unique map from the
+set $X_5$ is shown in \cref{fig:rysodda}.
+
+\subsection{The set $Y_k$ of maps}
+
+We will say that \emph{the vertex $w_j$ is the successor of the vertex
+$w_i$} (we denote it by $w_i \rightarrow w_j$) 
+if using the cyclic order of the corners we
+can move (by walking along the edges and holding them with the right hand)
+in two steps from a certain corner $c_i$ of the vertex $w_i$ to a certain
+corner $c_j$ of the vertex $w_j$, i.e., $\nast^2(c_i)=c_j$. 
+
+We consider any map from the set $Y_k$. Any such a map has one
+face and an odd number $k$ of edges. We denote the black vertex by $b$
+and  the white vertices by $w_1, w_2, w_3$. We will write the set $Y_k$ as
+a union of three sets which will be defined below.
+
+Let $Y_{k}^{\odd}\subseteq Y_k$ be the set of maps for which there exists an
+odd degree white vertex (let us say it is $w_3$) which has the other two white vertices 
+as successors, i.e., $w_3\rightarrow w_1$ and $w_3\rightarrow w_2$.
+Let $T_k^{\odd}$ be the set of all maps from the set $Y_k^{\odd}$ 
+together with the choice of a vertex $w_3$ with this property. 
+%\todo{czy chodzi o to, że $T_k^{\odd}$ jest zbiorem par $(\text{mapa},
+%\text{wierzchołek})$?}
+The unique map from the set $T_{5}^{\odd}$ is shown in \cref{fig:rysoddd}. Clearly
+\begin{equation}
+\label{ineqodd}
+|T_{k}^{\odd}| \geq |Y_{k}^{\odd}|.
+\end{equation}
+
+Let $Y_{k}^{\even}\subseteq Y_k$ be the set of maps such that there
+exists an even degree vertex (let us say it is $w_3$) which has the other 
+two white vertices as successors, i.e., $w_3\rightarrow w_1$ and $w_3\rightarrow w_2$. 
+Let $T_k^{\even}$ be the set of all the maps from the set $Y_k^{\even}$ with the choice 
+of a vertex $w_3$ with this property.  
+The unique map from the set $T_{5}^{\even}$ is shown in \cref{fig:rysevend}.
+Clearly
+\begin{align}
+\label{ineqeven}
+|T_{k}^{\even}| \geq |Y_{k}^{\even}|.
+\end{align}
+
+Let $Y_{k}^{\rest}\subseteq Y_k$ be the set of maps not included in the
+sets $Y_{k}^{\odd}$ and $Y_{k}^{\even}$, i.e. 
+\begin{align}
+\label{yrestdef}
+Y_{k}^{\rest}=Y_k \setminus (Y_{k}^{\odd} \cup Y_{k}^{\even}).
+\end{align}
+
+Consider some map $m\in Y_{k}^{\rest}$. 
+The set of white vertices with the arrows defined by the successor relation
+$\rightarrow$ becomes a directed graph which is strongly connected, and each
+white vertex has exactly one outgoing edge to another vertex (and potentially a
+loop). Without  loss  of  generality  we  may  assume  that $w_1 \rightarrow w_2$. Thus $w_2 \rightarrow w_3$, $w_3 \rightarrow w_1$.
+
+We claim that $m$ has a vertex of odd degree, greater than $1$. By contradiction,  suppose this is not the case. The map $m$ has at least one odd degree white vertex,
+because $\degg(w_1)+\degg(w_2)+\degg(w_3)=k$ is odd. Without loss of generality we may assume that $\degg(w_1)$ is odd. Since $$\degg(w_1)+\degg(w_2)+\degg(w_3)=k>3=1+1+1,$$ %\todo{$>4$ czy $\geq 4$?}
+it follows that $\degg(w_1)=1$ and $\degg(w_2),\degg(w_3)$ are even, because $m$
+does not have a white vertex with odd degree greater than $1$. The vertex $w_1$
+has a unique corner $c_1$.
+
+Naturally $\nast^2(c_1)$ 
+is a corner of the vertex $w_2$. 
+Note that $\nast^2$ is a permutation of the corners of 
+the white vertices which has only one cycle. 
+The corners of the white vertices are colored in three colors: $1, 2, 3$
+(according to the names of the vertices they are in).  
+If a corner $c$ has the color $a$, 
+its successor $\nast^2(c)$ has either the color $a$ or $1+a \operatorname{mod} 3$. 
+There is only one corner which has the color $1$, so the corner colors 
+(arranged in the cyclic order according to the unique cycle of $\nast^2$) are 
+$(1, 2, \ldots, 2, 3, \ldots, 3)$.
+Since exists only one corner $ c_2 $ of the white vertex $ w_2 $ such 
+that $ \nast ^ 2 (c_2) $ is the corner of the vertex $ w_3 $, 
+then the clockwise cyclic order of the edges in the black vertex $b$ is as
+follows: one edge connected to the vertex $w_1$, a certain number of edges connected
+to the vertex $w_2$, a certain number of edges connected to the vertex $w_3$.
+It is easy to see that we can replace all edges of the white vertex $w_2$ by a
+single edge and get a map with $4$ vertices, the one face and an even number of
+edges. We get a contradiction, because such maps does not exist. Therefore, the
+map $m$ has white vertex with an odd degree greater than $1$.
+
+Each corner of the vertex $b$ (inner angle in the vertex $b$ between 
+two neighboring edges of the map $m$) consists two edges $e_1$ and $e_2=\nast(e_1)$
+which connect this vertex with a some vertex/vertices. Let $T_k^{\rest}$
+be the set of all the maps from the set $Y_k^{\rest}$ with a selected vertex
+denoted by $w_3$ with an odd degree greater than $1$ and his edges decomposition into
+two non-empty, disjoint parts $P_1$ and $P_2$ where $P_1$ has an odd
+number of edges. Furthermore, we require that each corner 
+of the vertex $b$ containing two edges connected to the vertex $w_3$ 
+($e_1$ and $e_2$ are connected with the vertex $w_3$)
+fulfils one of the properties:
+\begin{itemize}
+\item $e_1, e_2 \in P_1$,
+\item $e_1, e_2 \in P_2$, 
+\item $e_1 \in P_1, e_2 \in P_2$. 
+\end{itemize}  
+An unique example of the map from the set $T_{5}^{\rest}$ is shown in
+\cref{fig:rysrestd} ($P_1$ has the blue dashed lines in the picture).
+Clearly
+\begin{align}
+\label{ineqrest}
+|T_{k}^{\rest}| \geq |Y_{k}^{\rest}|.
+\end{align}
+
+\pagebreak[1] 
+
+\section{Proof of main result}
+\subsection{Three bijections}
+\paragraph{First bijection}
+We consider any map $m$ from the set $X_{k}$. Let $b_1$ be the main
+vertex, and $w_1$ and $w_2$ are two auxiliary vertices. Naturally exists a
+third vertex $b_2$ which is connected with the vertices $w_1$ and $w_2$.
+We apply the left-handed edge sliding to two auxiliary vertices at the same time.
+Of course, the degree of the vertex $b_1$ does not change and is odd. In
+addition, $b_1$ has two distinct successors $w_1$ and $w_2$ different
+thatn $b_1$. Then we change the colour of black vertex $b_1$ to white and
+its name to $w_3$, and the name of vertex $b_2$ to $b$. We received a map
+from the set $T_k^{\odd}$ with a selected vertex $w_3$. Such
+transformation is a bijection. \cref{fig:rysodd} shows an example of this
+bijection for $k=5$. Thus
+\begin{align}
+\label{eqodd}
+|X_k|=|T_k^{\odd}|.
+\end{align}
+\vspace{-25pt}
+\begin{figure}[H]
+\rysodd{0.95}
+\caption
+{
+The example of the first bijection for the $5$ edged map.
+	\protect\subref{fig:rysodda} The map from the set $X_{5}$.
+	\protect\subref{fig:rysoddb} The map during the left-handed edge sliding.
+	\protect\subref{fig:rysoddc} The map after the edge sliding.
+	\protect\subref{fig:rysoddd} The map from the set $Y_{5}^{\odd}$.
+}
+\label{fig:rysodd}
+\end{figure}
+\vspace{-15pt}
+\paragraph{Second bijection}
+We consider any map $m$ from the set $X_{k}$. Let $b_2$ be the main
+vertex, and $w_1$ and $w_2$ are two auxiliary vertices. Naturally exists a
+third vertex $b_1$ which is connected with the vertices $w_1$ and $w_2$.
+We apply the left-handed edge sliding to two auxiliary vertices at the same time.
+Of course, the degree of the vertex $b_2$ does not change and is even. In
+addition, $b_2$ has two distinct successors $w_1$ and $w_2$ different than
+$b_2$. Then we change the colour of black vertex $b_2$ to white and its
+name to $w_3$, and the name of vertex $b_1$ to $b$. We received a map from
+the set $T_k^{\even}$ with a selected vertex $w_3$. Such transformation is
+a bijection. \cref{fig:ryseven} shows an example of this bijection for
+$k=5$. Thus 
+\begin{align}
+\label{eqeven}
+|X_k|=|T_k^{\even}|.
+\end{align}
+\begin{figure}[H]
+\ryseven{0.95}
+\caption
+{
+\protect\subref{fig:rysevena} - \protect\subref{fig:rysevend} 
+The example of the second bijection for the $5$ edged map. 
+}
+\label{fig:ryseven}
+\end{figure}
+
+\paragraph{Third bijection}
+We consider any map $m$ from the set $X_{k}$. Let $b_1$ be the main
+vertex, and $w_1$ and $w_2$ are two auxiliary vertices. Naturally exists a
+third vertex $b_2$ which is connected with the vertices $w_1$ and $w_2$.
+We apply at the same time the left-handed edge sliding to the auxiliary vertex
+$w_1$ and the right-handed edge sliding to the auxiliary vertex $w_2$. Of course,
+the degree of the vertex $b_1$ does not change and is odd. Then
+we change the colour of black vertex $b_1$ to white and its name to $w_3$,
+and the name of vertex $b_2$ to $b$. We can received a map from the set
+$T_k^{\rest}$ with a selected vertex $w_3$ and two parts of his set of
+edges and any such map can be obtained. Such transformation is a bijection between the set $X_k$ and some superset of the the set $T_k^{\rest}$. \cref{fig:rysrest} shows an
+example of this bijection for $k=5$. Thus
+\begin{align}
+\label{eqrest}
+|X_k| \geq |T_k^{\rest}|.
+\end{align}
+\vspace{-25pt}
+\begin{figure}[H]
+\rysrest{0.95}
+\caption
+{
+\protect\subref{fig:rysresta} - \protect\subref{fig:rysrestd} 
+The example of the third bijection for the $5$ edged map.
+}
+\label{fig:rysrest}
+\end{figure}
+
+\subsection{End of proof}
+Simple calculations give the end the proof
+\begin{align*}
+3[C_2^2]L_k & =3[R_2^2]K_k-[R_4]K_k \tag{by \ref{formula}}\\ 
+& =3|X_k|-|Y_k| \tag{by \ref{xdef},\ref{ydef}}\\ 
+& \geq |T_k^{\odd}|+|T_k^{\even}|+|T_k^{\rest}|-|Y_k| \tag{by \ref{eqodd},
+\ref{eqeven}, \ref{eqrest}}\\ & \geq |Y_k^{\odd}|+|Y_k^{\even}|+|
+Y_k^{\rest}|-|Y_k| \tag{by \ref{ineqodd}, \ref{ineqeven}, \ref{ineqrest}}\\
+& =|Y_k^{\odd} \cap Y_k^{\even}| \tag{by \ref{yrestdef}}\\ 
+& \geq 0.
+\end{align*}
+\printbibliography 
+
+\end{document} 
