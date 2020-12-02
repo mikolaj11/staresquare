@@ -165,7 +165,7 @@
 
 \AtBeginDocument{\gdef \@thefirstpage{\thepage}}
 
-\long \gdef \@firsthead{\parbox{\textwidth}{\footnotesize \textit{S\'eminaire Lotharingien de Combinatoire} XX (2021) \hfill \textit{Proceedings of the 33$^\text{rd}$ Conference on Formal Power} \newline Article \#\@articlenumber, \pageref*{LastPage} pp. \hfill \textit{Series and Algebraic Combinatorics (Ramat Gan)}}}
+\long \gdef \@firsthead{\parbox{\textwidth}{\footnotesize  }}
 
 
 \def \ps@first{
