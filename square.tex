@@ -754,13 +754,16 @@ $$3\big\|X_k\big\| \geq \big\|Y_k\big\|.$$
 
 \subsection{Edge sliding}
 
-We define \emph{the right-handed edge sliding} on a graph as follows. We start
-from a graph $G$ drawn on a surface with selected the main
-vertex $M$ and the set of auxiliary vertices $A$. We assume that no exists any edge between the auxiliary vertices. We assume also
-that for each $A_i \in A$, exists at least one vertex (different from $M$) which is
-connected with the auxiliary vertex $A_i$. 
+\todo[inline]{szybkie pytanie: czy krawędzi łączące wierzchołek z samym sobą są ok?}
 
-By \emph{the special edges} we will understand the edges connecting $M$ and $A$;
+We define \emph{the right-handed edge sliding} on a graph as follows. We start
+from a graph $G$ drawn on a surface with selected the main vertex $M$ and the
+set $\mathcal{A}$ of auxiliary vertices. We assume that there are no edges between any
+auxiliary vertices. We assume also that for each $A \in \mathcal{A}$ there exists at least
+one vertex (different from $M$) which is connected with the auxiliary vertex
+$A$.
+
+By \emph{the special edges} we will understand the edges connecting $M$ and $\mathcal{A}$;
 by \emph{the rest of the graph $G'$} we will understand the graph with the
 special edges removed. A \emph{corner} of $G'$ is an inner angle in a vertex
 between two neighboring edges of $G'$. We denote by $\nast$ the permutation on the set
@@ -770,6 +773,8 @@ cyclic order
 (i.e., by going along the boundary of the face of $G'$, touching it with the
 right-hand side). 
 For the example on \cref{fig:rysnum} we have $\nast=(1')(1,2,3,4,5,6)$.
+
+
 \begin{figure}
 \sliding{0.95}
 \caption
@@ -783,21 +788,29 @@ For the example on \cref{fig:rysnum} we have $\nast=(1')(1,2,3,4,5,6)$.
 }
 \label{fig:sliding}
 \end{figure}
-Each corner of a vertex $A_i \in A$ can contain some special edges. 
-The output of the right-handed edge sliding applied 
-to the vertices $A_i \in A$ is defined as the graph $G$ 
+\todo{\cref{fig:sliding}: czy $\mathcal{A}=\{ A\}$?}
+
+
+Each corner $c$ of a vertex $A \in \mathcal{A}$ can contain some special edges. 
+The output of the right-handed edge sliding 
+is defined as the graph $G$ 
 in which these special edges from each such a corner $c$ 
-of the vertex $A_i$ are shifted to the next corner $\nast(c)$
+are shifted to the next corner $\nast(c)$
 (see \cref{fig:sliding} for an example).
+
+\todo[inline]{jeśli wierzchołek $M$ jest połączony z wierzchołkiem nie-auxiliary, efektem ślizgania może być krawędź, która zaczyna się i kończy w $M$. Czy pętle są ok?}
+
 
 \medskip
 
 Similarly, we define \emph{the left-handed edge sliding} 
 in which the special edges in a corner $c$ are shifted to the corner $\nast^{-1}(c)$. 
 
-If the main vertex $M$ have not common neighbours with any vertex $A_i$,
+If the main vertex $M$ does not have any common neighbours with any vertex $A\in\mathcal{A}$,
 then the right-handed edge sliding is the inverse of the left-handed edges
-sliding. In addition, the edge sliding on a graph does not change the
+sliding. 
+\todo[inline]{to chyba nie jest prawda. Kiedy dokonasz przesunięcia krawędzi, krawędź przestaje być specjalna, więc przy left-handed przesuwaniu nie będzie przesuwana, zob.~\cref{fig:sliding}. Co więc Autor miał na myśli?}
+In addition, the edge sliding on a graph does not change the
 number of faces of this graph.  
 
 \subsection{The set $X_k$ of maps} 
