@@ -756,6 +756,9 @@ $$3\big\|X_k\big\| \geq \big\|Y_k\big\|.$$
 
 %\todo[inline]{szybkie pytanie: czy krawędzi łączące wierzchołek z samym sobą są ok?}
 
+\todo{Pewnie bardziej zgodne z tradycją językową byłoby nazwanie tego \emph{clockwise edge sliding} albo \emph{counterclockwise edge sliding}}
+
+
 We define \emph{the right-handed edge sliding} on a graph as follows. We start
 from a graph $G$ without loops drawn on a surface with selected the main vertex $M$ and the
 set $\mathcal{A}$ of auxiliary vertices. We assume that there are no edges between any
@@ -796,7 +799,8 @@ The output of the right-handed edge sliding
 is defined as the graph $G$ 
 in which these special edges from each such a corner $c$ 
 are shifted to the next corner $\nast(c)$
-(see \cref{fig:sliding} for an example where $\mathcal{A}=\{ A\}$).
+(see \cref{fig:sliding} for an example where $\mathcal{A}=\{ A\}$
+\todo{ta uwaga powinna się znaleźć w podpisie pod rysunkiem, a nie w tekście głównym. Moje TODOs nie mogą być umieszczone w podpisach}).
 
 %\todo[inline]{jeśli wierzchołek $M$ jest połączony z wierzchołkiem nie-auxiliary, efektem ślizgania może być krawędź, która zaczyna się i kończy w $M$. Czy pętle są ok?}
 
@@ -807,8 +811,15 @@ Similarly, we define \emph{the left-handed edge sliding}
 in which the special edges in a corner $c$ are shifted to the corner $\nast^{-1}(c)$. 
 
 The right-handed edge sliding is the inverse of the left-handed edges
-sliding (for other set of auxiliary vertices, but the same main vertex and the same special edges).
+sliding (for another set of auxiliary vertices, but the same main vertex and the same special edges).
 %\todo[inline]{to chyba nie jest prawda. Kiedy dokonasz przesunięcia krawędzi, krawędź przestaje być specjalna, więc przy left-handed przesuwaniu nie będzie przesuwana, zob.~\cref{fig:sliding}. Co więc Autor miał na myśli?}
+\todo[inline]{Umiem znaleźć prosty przykład, w którym ten nowy zbiór auxiliary
+    vertices musi zawierać dwa wierzchołki, które są połączone krawędzią, a to jest
+    zabronione zgodnie z Twoimi zasadami. Dobrze byłoby a) podać dobrą definicję
+    ślizgania, i/lub b) jeśli nie potrzebujesz tej odwrotności, skasować poprzednie
+    zdanie (ale może jednak tej odwrotności będziesz potrzebować, wtedy warto byłoby
+    pisać zdania, których sens rozumiemy }
+
 In addition, the edge sliding on a graph does not change the
 number of faces of this graph.  
 
