@@ -402,9 +402,9 @@
 			\prosto{$(0,0)$}{$(1,0.6)$}{black}
 			\lewo{$(1,0.6)$}{b}{90}{black}
 			\lewo{b}{d}{65}{black}
-			\wierzcholek{a}{black}{M}{gora}
+			\wierzcholek{a}{black}{}{gora}
 			\wierzcholek{b}{black}{}{gora}
-			\wierzcholek{d}{black}{A}{$(dol)+(-0.2,0.0)$}
+			\wierzcholek{d}{black}{}{$(dol)+(-0.2,0.0)$}
 		\end{tikzpicture}
 		\label{fig:rysprzed}
 	}
@@ -420,9 +420,9 @@
 			\prosto{$(0,0)$}{$(1,0.6)$}{black}
 			\lewo{$(1,0.6)$}{b}{90}{black}
 			\lewo{b}{d}{65}{black}
-			\wierzcholek{a}{black}{M}{gora}
+			\wierzcholek{a}{black}{}{gora}
 			\wierzcholek{b}{black}{}{gora}
-			\wierzcholek{d}{black}{A}{$(dol)+(-0.2,0.0)$}
+			\wierzcholek{d}{black}{}{$(dol)+(-0.2,0.0)$}
 		\end{tikzpicture}
 		\label{fig:rysw}
 	}
@@ -438,9 +438,9 @@
 			\prosto{$(0,0)$}{$(1,0.6)$}{black}
 			\lewo{$(1,0.6)$}{b}{90}{black}
 			\lewo{b}{d}{65}{black}
-			\wierzcholek{a}{black}{M}{gora}
+			\wierzcholek{a}{black}{}{gora}
 			\wierzcholek{b}{black}{}{gora}
-			\wierzcholek{d}{black}{A}{$(dol)+(-0.2,0.0)$}
+			\wierzcholek{d}{black}{}{$(dol)+(-0.2,0.0)$}
 		\end{tikzpicture}
 		\label{fig:ryspo}
 	}
@@ -754,28 +754,24 @@ $$3\big\|X_k\big\| \geq \big\|Y_k\big\|.$$
 
 \subsection{Edge sliding}
 
-%\todo[inline]{szybkie pytanie: czy krawędzi łączące wierzchołek z samym sobą są ok?}
+We define \emph{the edge sliding} on a graph as follows. 
+We start from a graph $G$ without loops drawn on a surface 
+with selected set of special edges. 
+We assume that each special edge has selected its one end 
+and its direction (left or right).
 
-\todo{Pewnie bardziej zgodne z tradycją językową byłoby nazwanie tego \emph{clockwise edge sliding} albo \emph{counterclockwise edge sliding}}
-
-
-We define \emph{the right-handed edge sliding} on a graph as follows. We start
-from a graph $G$ without loops drawn on a surface with selected the main vertex $M$ and the
-set $\mathcal{A}$ of auxiliary vertices. We assume that there are no edges between any
-auxiliary vertices. We assume also that for each $A \in \mathcal{A}$ there exists at least
-one vertex (different from $M$) which is connected with the auxiliary vertex
-$A$. We assume also that the main vertex $M$ does not have any common neighbours with any vertex $A\in\mathcal{A}$.
-
-By \emph{the special edges} we will understand the edges connecting $M$ and $\mathcal{A}$;
-by \emph{the rest of the graph $G'$} we will understand the graph with the
-special edges removed. A \emph{corner} of $G'$ is an inner angle in a vertex
-between two neighboring edges of $G'$. We denote by $\nast$ the permutation on the set
-of corners of $G'$ such that each cycle of $\nast$ corresponds to the corners
-which belong to some face of $G'$, arranged in the 
-cyclic order
-(i.e., by going along the boundary of the face of $G'$, touching it with the
-right-hand side). 
-For the example on \cref{fig:rysnum} we have $\nast=(1')(1,2,3,4,5,6)$.
+By the rest of the graph $G'$ we will understand the graph 
+with the special edges removed. A corner of
+$G'$ is an inner angle in a vertex between 
+two neighboring edges of $G'$. 
+We denote by $\sigma$ the permutation 
+on the set of corners of $G'$ such that 
+each cycle of $\sigma$ corresponds to the
+corners which belong to some face of $G'$, 
+arranged in the cyclic order (i.e., by going along
+the boundary of the face of $G'$, touching it with the right-hand side).
+For the example on \cref{fig:rysnum} we have 
+$\sigma = ( 1' )( 1, 2, 3, 4, 5, 6 ).$
 
 
 \begin{figure}
@@ -784,44 +780,107 @@ For the example on \cref{fig:rysnum} we have $\nast=(1')(1,2,3,4,5,6)$.
 {
 	An example of the edge sliding.
 	\protect\subref{fig:rysprzed} A graph with special edges coloured red.
-	\protect\subref{fig:rysw} The graph during the right-handed edge sliding.
+	\protect\subref{fig:rysw} The graph during the edge sliding. 
+	Each special edge has the selected end at the bottom and 
+	the direction right. 
 	\protect\subref{fig:ryspo} The graph after the edge sliding.
 	\protect\subref{fig:rysnum} The graph without the special edges with
 	numbered order of the corners.
 }
 \label{fig:sliding}
 \end{figure}
-%\todo{\cref{fig:sliding}: czy $\mathcal{A}=\{ A\}$?}
 
+Each corner $c$ of a graph $G'$ can contain some selected ends 
+of special edges. The output of the edge sliding is defined 
+as the graph $G$ in which these selected ends of special edges 
+in a corner $c$ are slided to the next corner $\sigma(c)$ 
+if the direction is right and previous corner $\sigma^{-1}(c)$ 
+if the direction is left. (see \cref{fig:sliding} for an example).
 
-Each corner $c$ of a vertex $A \in \mathcal{A}$ can contain some special edges. 
-The output of the right-handed edge sliding 
-is defined as the graph $G$ 
-in which these special edges from each such a corner $c$ 
-are shifted to the next corner $\nast(c)$
-(see \cref{fig:sliding} for an example where $\mathcal{A}=\{ A\}$
-\todo{ta uwaga powinna się znaleźć w podpisie pod rysunkiem, a nie w tekście głównym. Moje TODOs nie mogą być umieszczone w podpisach}).
+A collision of selected edge end $e$ is possible in two cases. First case, when exists the end of a special edge on the relevant side in the same corner, which does not slide in the same direction. Second case, when in the corner to which move the end $e$, exists the end of a special edge which slide in the opposite direction. 
 
-%\todo[inline]{jeśli wierzchołek $M$ jest połączony z wierzchołkiem nie-auxiliary, efektem ślizgania może być krawędź, która zaczyna się i kończy w $M$. Czy pętle są ok?}
+Additionally, we also assume that special edges, their ends and 
+their directions are selected in such a special way that 
+during sliding the edges will have not collision and 
+the graph obtained at the end will not contain a loop. 
 
-
-\medskip
-
-Similarly, we define \emph{the left-handed edge sliding} 
-in which the special edges in a corner $c$ are shifted to the corner $\nast^{-1}(c)$. 
-
-The right-handed edge sliding is the inverse of the left-handed edges
-sliding (for another set of auxiliary vertices, but the same main vertex and the same special edges).
-%\todo[inline]{to chyba nie jest prawda. Kiedy dokonasz przesunięcia krawędzi, krawędź przestaje być specjalna, więc przy left-handed przesuwaniu nie będzie przesuwana, zob.~\cref{fig:sliding}. Co więc Autor miał na myśli?}
-\todo[inline]{Umiem znaleźć prosty przykład, w którym ten nowy zbiór auxiliary
-    vertices musi zawierać dwa wierzchołki, które są połączone krawędzią, a to jest
-    zabronione zgodnie z Twoimi zasadami. Dobrze byłoby a) podać dobrą definicję
-    ślizgania, i/lub b) jeśli nie potrzebujesz tej odwrotności, skasować poprzednie
-    zdanie (ale może jednak tej odwrotności będziesz potrzebować, wtedy warto byłoby
-    pisać zdania, których sens rozumiemy }
-
+The edge sliding is a bijection. The inversion of the edge sliding is 
+the edge sliding with the selection for the same special edges, 
+the same ends of these edges and the opposite directions of these edges.
 In addition, the edge sliding on a graph does not change the
 number of faces of this graph.  
+
+%\subsection{Edge sliding}
+%
+%\todo[inline]{szybkie pytanie: czy krawędzi łączące wierzchołek z samym sobą są ok?}
+%
+%\todo{Pewnie bardziej zgodne z tradycją językową byłoby nazwanie tego 
+%\emph{clockwise edge sliding} albo \emph{counterclockwise edge sliding}}
+%
+%
+%We define \emph{the right-handed edge sliding} on a graph as follows. We %start
+%from a graph $G$ without loops drawn on a surface with selected the main %vertex $M$ and the
+%set $\mathcal{A}$ of auxiliary vertices. We assume that there are no %edges between any
+%auxiliary vertices. We assume also that for each $A \in \mathcal{A}$ %there exists at least
+%one vertex (different from $M$) which is connected with the auxiliary %vertex
+%$A$. We assume also that the main vertex $M$ does not have any common %neighbours with any vertex $A\in\mathcal{A}$.
+%
+%By \emph{the special edges} we will understand the edges connecting $M$ %and $\mathcal{A}$;
+%by \emph{the rest of the graph $G'$} we will understand the graph with the
+%special edges removed. A \emph{corner} of $G'$ is an inner angle in a %vertex
+%between two neighboring edges of $G'$. We denote by $\nast$ the %permutation on the set
+%of corners of $G'$ such that each cycle of $\nast$ corresponds to the %corners
+%which belong to some face of $G'$, arranged in the 
+%cyclic order
+%(i.e., by going along the boundary of the face of $G'$, touching it with %the
+%right-hand side). 
+%For the example on \cref{fig:rysnum} we have $\nast=(1')(1,2,3,4,5,6)$.
+%
+%
+%\begin{figure}
+%\sliding{0.95}
+%\caption
+%{
+	%An example of the edge sliding.
+%	\protect\subref{fig:rysprzed} A graph with special edges coloured red.
+%	\protect\subref{fig:rysw} The graph during the right-handed edge sliding.
+%	\protect\subref{fig:ryspo} The graph after the edge sliding.
+%	\protect\subref{fig:rysnum} The graph without the special edges with
+%	numbered order of the corners.
+%}
+%\label{fig:sliding}
+%\end{figure}
+%\todo{\cref{fig:sliding}: czy $\mathcal{A}=\{ A\}$?}
+%
+%
+%Each corner $c$ of a vertex $A \in \mathcal{A}$ can contain some special %edges. 
+%The output of the right-handed edge sliding 
+%is defined as the graph $G$ 
+%in which these special edges from each such a corner $c$ 
+%are shifted to the next corner $\nast(c)$
+%(see \cref{fig:sliding} for an example where $\mathcal{A}=\{ A\}$
+%\todo{ta uwaga powinna się znaleźć w podpisie pod rysunkiem, a nie w %tekście głównym. Moje TODOs nie mogą być umieszczone w podpisach}).
+%
+%%\todo[inline]{jeśli wierzchołek $M$ jest połączony z wierzchołkiem nie-%auxiliary, efektem ślizgania może być krawędź, która zaczyna się i kończy %w $M$. Czy pętle są ok?}
+%
+%
+%\medskip
+%
+%Similarly, we define \emph{the left-handed edge sliding} 
+%in which the special edges in a corner $c$ are shifted to the corner $%\nast^{-1}(c)$. 
+%
+%The right-handed edge sliding is the inverse of the left-handed edges
+%sliding (for another set of auxiliary vertices, but the same main vertex %and the same special edges).
+%%\todo[inline]{to chyba nie jest prawda. Kiedy dokonasz przesunięcia %krawędzi, krawędź przestaje być specjalna, więc przy left-handed %przesuwaniu nie będzie przesuwana, zob.~\cref{fig:sliding}. Co więc Autor %miał na myśli?}
+%\todo[inline]{Umiem znaleźć prosty przykład, w którym ten nowy zbiór %auxiliary
+%    vertices musi zawierać dwa wierzchołki, które są połączone krawędzią, %a to jest
+%    zabronione zgodnie z Twoimi zasadami. Dobrze byłoby a) podać dobrą %definicję
+%    ślizgania, i/lub b) jeśli nie potrzebujesz tej odwrotności, skasować %poprzednie
+%    zdanie (ale może jednak tej odwrotności będziesz potrzebować, wtedy %warto byłoby
+%    pisać zdania, których sens rozumiemy }
+%
+%In addition, the edge sliding on a graph does not change the
+%number of faces of this graph.  
 
 \subsection{The set $X_k$ of maps} 
 
@@ -945,14 +1004,14 @@ Clearly
 \section{Proof of main result}
 \subsection{Three bijections}
 \paragraph{First bijection}
-We consider any map $m$ from the set $X_{k}$. Let $b_1$ be the main
-vertex, and $w_1$ and $w_2$ are two auxiliary vertices. Naturally exists a
-third vertex $b_2$ which is connected with the vertices $w_1$ and $w_2$.
-We apply the left-handed edge sliding to two auxiliary vertices at the same time.
-Of course, the degree of the vertex $b_1$ does not change and is odd. In
-addition, $b_1$ has two distinct successors $w_1$ and $w_2$ different
-thatn $b_1$. Then we change the colour of black vertex $b_1$ to white and
-its name to $w_3$, and the name of vertex $b_2$ to $b$. We received a map
+We consider any map $m$ from the set $X_{k}$. As the set of special edges,
+we select all edges connecting the vertex $b_1$ with the white vertices.
+Each special edge has the selected end in the white vertex and 
+the direction left. We apply the edge sliding on the map $m$.
+Then we change the color of the black vertex $b_1$ to white and
+its name to $w_3$, and the name of vertex $b_2$ to $b$. Of course, the degree of the vertex $w_3$ does not change and is odd. In
+addition, $w_3$ has two distinct successors $w_1$ and $w_2$ different
+than $w_3$. We received a map
 from the set $T_k^{\odd}$ with a selected vertex $w_3$. Such
 transformation is a bijection. \cref{fig:rysodd} shows an example of this
 bijection for $k=5$. Thus
@@ -967,7 +1026,7 @@ bijection for $k=5$. Thus
 {
 The example of the first bijection for the $5$ edged map.
 	\protect\subref{fig:rysodda} The map from the set $X_{5}$.
-	\protect\subref{fig:rysoddb} The map during the left-handed edge sliding.
+	\protect\subref{fig:rysoddb} The map during the edge sliding.
 	\protect\subref{fig:rysoddc} The map after the edge sliding.
 	\protect\subref{fig:rysoddd} The map from the set $Y_{5}^{\odd}$.
 }
@@ -975,17 +1034,17 @@ The example of the first bijection for the $5$ edged map.
 \end{figure}
 \vspace{-15pt}
 \paragraph{Second bijection}
-We consider any map $m$ from the set $X_{k}$. Let $b_2$ be the main
-vertex, and $w_1$ and $w_2$ are two auxiliary vertices. Naturally exists a
-third vertex $b_1$ which is connected with the vertices $w_1$ and $w_2$.
-We apply the left-handed edge sliding to two auxiliary vertices at the same time.
-Of course, the degree of the vertex $b_2$ does not change and is even. In
-addition, $b_2$ has two distinct successors $w_1$ and $w_2$ different than
-$b_2$. Then we change the colour of black vertex $b_2$ to white and its
-name to $w_3$, and the name of vertex $b_1$ to $b$. We received a map from
-the set $T_k^{\even}$ with a selected vertex $w_3$. Such transformation is
-a bijection. \cref{fig:ryseven} shows an example of this bijection for
-$k=5$. Thus 
+We consider any map $m$ from the set $X_{k}$. As the set of special edges,
+we select all edges connecting the vertex $b_2$ with the white vertices.
+Each special edge has the selected end in the white vertex and 
+the direction left. We apply the edge sliding on the map $m$.
+Then we change the color of the black vertex $b_2$ to white and
+its name to $w_3$, and the name of vertex $b_1$ to $b$. Of course, the degree of the vertex $w_3$ does not change and is even. In
+addition, $w_3$ has two distinct successors $w_1$ and $w_2$ different
+than $w_3$. We received a map
+from the set $T_k^{\even}$ with a selected vertex $w_3$. Such
+transformation is a bijection. \cref{fig:rysodd} shows an example of this
+bijection for $k=5$. Thus
 \begin{align}
 \label{eqeven}
 |X_k|=|T_k^{\even}|.
@@ -1001,17 +1060,14 @@ The example of the second bijection for the $5$ edged map.
 \end{figure}
 
 \paragraph{Third bijection}
-We consider any map $m$ from the set $X_{k}$. Let $b_1$ be the main
-vertex, and $w_1$ and $w_2$ are two auxiliary vertices. Naturally exists a
-third vertex $b_2$ which is connected with the vertices $w_1$ and $w_2$.
-We apply at the same time the left-handed edge sliding to the auxiliary vertex
-$w_1$ and the right-handed edge sliding to the auxiliary vertex $w_2$. Of course,
-the degree of the vertex $b_1$ does not change and is odd. Then
-we change the colour of black vertex $b_1$ to white and its name to $w_3$,
-and the name of vertex $b_2$ to $b$. We can received a map from the set
-$T_k^{\rest}$ with a selected vertex $w_3$ and two parts of his set of
-edges and any such map can be obtained. Such transformation is a bijection between the set $X_k$ and some superset of the the set $T_k^{\rest}$. \cref{fig:rysrest} shows an
-example of this bijection for $k=5$. Thus
+We consider any map $m$ from the set $X_{k}$. As the set of special edges,
+we select all edges connecting the vertex $b_1$ with the white vertices.
+Each special edge has the selected end in the white vertex and
+the direction left for the edges connected with $w_1$ and the direction right for the edges connected with $w_2$. We apply the edge sliding on the map $m$.
+Then we change the color of the black vertex $b_1$ to white and
+its name to $w_3$, and the name of vertex $b_2$ to $b$. Of course, the degree of the vertex $w_3$ does not change and is odd. We received a map
+from the superset of the set $T_k^{\rest}$ with a selected vertex $w_3$. Such transformation is a bijection. \cref{fig:rysodd} shows an example of this
+bijection for $k=5$. Thus
 \begin{align}
 \label{eqrest}
 |X_k| \geq |T_k^{\rest}|.
