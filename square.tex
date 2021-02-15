@@ -598,8 +598,8 @@ they are equal to certain scaled coefficients of the Kerov polynomial:
 In this
 paper we will prove that the coefficient of $C_2^2$ is non-negative.
 Using the same methods we will prove in a separate paper \cite{Mar21} that 
-any square coefficients $[ C_i C_j ] L_k$ are non-negative. 
-The next step towards the proof of Goulden--Rattan conjecture would be understand 
+any quadratic coefficients $[ C_i C_j ] L_k$ are non-negative. 
+The next step towards the proof of Goulden--Rattan conjecture would be to understand 
 the cubic coefficients $ [ C_i C_j C_u ] L_k$; we hope that 
 our methods will still be applicable there, nevertheless there seem to be 
 some difficulties related to the inclusion-exclusion principle.
@@ -645,9 +645,11 @@ Using the Euler characteristic we get
 2-2g=\chi=V-k+1
 \end{align}
 where $g$ denotes the genus of the surface and $V$ denotes the number of the vertices.
+\todo{a co to jest $k$?}
 
 Two following two theorems give a combinatorial interpretation to the linear
 and square coefficients of the Kerov character polynomials.
+\todo{czy te twierdzenia są głównym wynikiem tej pracy? Jeśli nie, to warto to w jawny sposób powiedzieć.}
 
 \begin{theorem}
 \label{thm2}
@@ -674,8 +676,7 @@ C_i C_j &= (i-1)(j-1) R_i R_j + 0  R_{i+j} + \text{(sum of other terms)},\\
 C_{i+j} &=2(i-1)(j-1)R_iR_j+(i+j-1)R_{i+j}+\text{(sum of other terms)} 
 \qquad \text{for $i\neq j$.}
 \end{align*}
-Moreover, if we consider the terms $C_{i_1} C_{i_2}\cdots C_{i_t}$, then 
-only the terms $C_i C_j$ and $C_{i+j}$ contain the expression $R_i R_j$ or $R_{i+j}$.
+Moreover, any product $C_{i_1} C_{i_2}\cdots C_{i_t}$ of at least $t\geq 3$ factors does not contain any of the terms $C_i C_j$ and $C_{i+j}$.
 It follows that the quadratic coefficients of the Goulden--Rattan polynomial are 
 related to the coefficients of the Kerov polynomial via
 \begin{align*}
@@ -708,13 +709,15 @@ for the square coefficients in the expander language, as follows.
 \begin{con} 
     \label{con:GJ2}
 Let $i, j$ be natural numbers. Then 
-$$(2j-1)\ \left\| X_k(j, j) \right\| \geq (j-1)^2\ \left\| Y_k(2j) \right\|$$
-and
-$$(i+j-1)\ \left\| X_k(i, j) \right\| \geq 2(i-1)(j-1)\ \left\| Y_k(i+j) \right\|$$
+\begin{align*}
+(2j-1)\ \left\| X_k(j, j) \right\|    &   \geq (j-1)^2\ \left\| Y_k(2j) \right\| \\
+\intertext{and}
+(i+j-1)\ \left\| X_k(i, j) \right\|  & \geq 2(i-1)(j-1)\ \left\| Y_k(i+j) \right\|
+\end{align*}
 for any natural number $k$. 
 \end{con}
 These inequalities are equivalent to the positivity 
-of the coefficients $[C_j^2] L_k$ and $[C_i C_j] L_k$. 
+of the coefficients $[C_j^2] L_k$ and $[C_i C_j] L_k$ respectively.
 In this text we prove the positivity in the special case $i=j=2$. 
 We postpone the proof of \cref{con:GJ2} in its general form to the forthcoming full version of this paper.
 
@@ -728,11 +731,11 @@ the Goulden--Rattan polynomials
 [C_2^2] L_8 &=0-0=0,
 \end{split}
 \begin{split}
-[C_2^2] L_5 &=5-\frac{1}{3}15=0,\\
-[C_2^2] L_7 &=224-\frac{1}{3}469=\frac{203}{3}.\\
+[C_2^2] L_5 &=5-\frac{1}{3} \cdot 15=0,\\
+[C_2^2] L_7 &=224-\frac{1}{3} \cdot 469=\frac{203}{3}.\\
 \end{split}
 \end{align*}
-Note that if $k$ is even then $[C_2^2] L_k=0$ because there does not exists an expander with $4$ vertices and an odd number of edges, since
+Note that if $k$ is even then $[C_2^2] L_k=0$ because there does not exist an expander with $4$ vertices and an odd number of edges, since
 $2-2g=2j-k+1$ by \cref{euler}. Thus we can assume that the number of edges $k$ is odd. 
 
 Let 
@@ -754,24 +757,26 @@ $$3\big\|X_k\big\| \geq \big\|Y_k\big\|.$$
 
 \subsection{Edge sliding}
 
-We define \emph{the edge sliding} on a graph as follows. 
-We start from a graph $G$ without loops drawn on a surface 
-with selected set of special edges. 
-We assume that each special edge has selected its one end 
-and its direction (left or right).
-
-By the rest of the graph $G'$ we will understand the graph 
-with the special edges removed. A corner of
-$G'$ is an inner angle in a vertex between 
-two neighboring edges of $G'$. 
-We denote by $\sigma$ the permutation 
-on the set of corners of $G'$ such that 
-each cycle of $\sigma$ corresponds to the
-corners which belong to some face of $G'$, 
-arranged in the cyclic order (i.e., by going along
-the boundary of the face of $G'$, touching it with the right-hand side).
-For the example on \cref{fig:rysnum} we have 
-$\sigma = ( 1' )( 1, 2, 3, 4, 5, 6 ).$
+We define \emph{the edge sliding} on a graph as follows. We start from a graph
+$G$ without loops drawn on a surface with a selected set of \emph{special
+    edges}. We assume that for each special edge one of its endpoints is selected
+\todo{to nie jest dobry tekst, wymaga radykalnych środków} and its direction
+(left or right). \todo[inline]{co to znaczy? czy na specjalnej krawędzi
+    direction oznacza narysowanie strzałki na krawędzi? czy to znaczy, że na
+    wybranym końcu krawędzi wybieramy jeden z dwóch rogów, które przylegają do
+    krawędzi? a co jeśli ta krawędź jest liściem? co to znaczy w lewo albo w prawo?
+    Na rysunku \cref{fig:sliding} nie ma zaznaczonej informacji o kierunku. Czy ta
+    informacja jest literką L / R czy strzałką? Również na tym rysunku nie ma
+    informacji o tym, który koniec jest \emph{selected}.} By \emph{the rest of the graph $G'$} we will understand the
+graph $G$ with the special edges removed. \todo[inline]{ale narysowany na tej
+    samej powierzchni, nawet jeśli nie jest już minimalna?} A \emph{corner} of $G'$
+is an inner angle in a vertex between two neighboring edges of $G'$. We denote
+by $\sigma$ the permutation on the set of corners of $G'$ such that each cycle
+of $\sigma$ corresponds to the corners which belong to some face of $G'$,
+arranged in the \todo{clockwise? counterclockwise?} cyclic order (i.e., by going
+along the boundary of the face of $G'$, touching it with the right-hand side).
+For the example on \cref{fig:rysnum} we have $\sigma = ( 1' )( 1, 2, 3, 4, 5, 6
+).$
 
 
 \begin{figure}
@@ -789,26 +794,46 @@ $\sigma = ( 1' )( 1, 2, 3, 4, 5, 6 ).$
 }
 \label{fig:sliding}
 \end{figure}
+\todo[inline]{prośba człowieka bez kolorowej drukarki: czy czerwone krawędzi mogłyby różnić się grubością (np.~mogą być cieńsze) od krawędzi czarnych (grubszych?)}
 
-Each corner $c$ of a graph $G'$ can contain some selected ends 
-of special edges. The output of the edge sliding is defined 
-as the graph $G$ in which these selected ends of special edges 
-in a corner $c$ are slided to the next corner $\sigma(c)$ 
-if the direction is right and previous corner $\sigma^{-1}(c)$ 
-if the direction is left. (see \cref{fig:sliding} for an example).
 
-A collision of selected edge end $e$ is possible in two cases. First case, when exists the end of a special edge on the relevant side in the same corner, which does not slide in the same direction. Second case, when in the corner to which move the end $e$, exists the end of a special edge which slide in the opposite direction. 
+Each corner $c$ of the graph $G'$ can contain some selected ends 
+of the special edges. The output of the edge sliding is defined 
+as the graph $G$ in which these selected ends of the special edges 
+in a corner $c$ are slid to the next corner $\sigma(c)$ 
+if the direction is right and to the previous corner $\sigma^{-1}(c)$ 
+if the direction is left (see \cref{fig:sliding} for an example).
+\todo[inline]{czy wszystkie wybrane końce w danym rogu muszą mieć ten sam kierunek lewo/prawo? Ten tekst pokazuje, że użycie liczby mnogiej jest zwykle złym pomysłem i kiedy to tylko możliwe warto użyć liczby pojedynczej. } So defined edge sliding is well-defined, as long as there are no \emph{collisions}.
+
+
+\todo[inline]{czy można prosić o ilustracje przedstawiające czym są kolizje? tekst poniżej aż o nie prosi.}
+A \emph{collision} of a selected edge end $e$ is possible in two cases. 
+\todo[inline]{Wydaje się naturalne, że kolizja dotyczy zderzenia DWÓCH rzeczy. Zderzenie dwóch samochodów. Czy może się zderzyć JEDEN samochód?}
+
+The first case, when THERE
+exists the end of a special edge on the relevant side in the same corner, which
+does not slide in the same direction. The second case, when in the corner to which we
+move the end $e$, THERE exists the end of a special edge which slides in the opposite
+direction.
 
 Additionally, we also assume that special edges, their ends and 
 their directions are selected in such a special way that 
-during sliding the edges will have not collision and 
+during sliding the edges will not collide and 
 the graph obtained at the end will not contain a loop. 
 
-The edge sliding is a bijection. The inversion of the edge sliding is 
+The edge sliding is a bijection. 
+\todo[inline]{To zaczyna być nudne: żeby to zdanie coś oznaczało, musisz powiedzieć między jakimi dwoma zbiorami jest to bijekcja.}
+The inverse of the edge sliding is 
 the edge sliding with the selection for the same special edges, 
 the same ends of these edges and the opposite directions of these edges.
+\todo[inline]{To zdanie sugeruje, ze edge sliding jest jakąś operacją na jakimś zbiorze. Wtedy miałoby sens mówić o operacji odwarotnej. Jaki jest sens tego zdania? Czy potrzbujesz tego zdania, czy możemy je usunąć?}
 In addition, the edge sliding on a graph does not change the
 number of faces of this graph.  
+
+
+\todo[inline]{W długiej wersji tego tekstu zamawiam alternatywny opis ślizgania
+    krawędzi oparty na bardziej precyzyjnym języku, gorąco polecam
+    \url{https://arxiv.org/abs/1301.6531} jako punkt startu}
 
 %\subsection{Edge sliding}
 %
@@ -889,19 +914,21 @@ map has one face and an odd number $k$ of edges. We denote the black
 vertices by $b_1, b_2$ and the white vertices by $w_1, w_2$. There is
 at least one edge between each pair of the vertices of different colours.
 Of course, $\degg(b_1)+\degg(b_2)=k$ is an odd number. Without loss of generality 
-we may assume that $\degg(b_1)>0$ is odd number and $\degg(b_2)>0$ is even.
+we may assume that $\degg(b_1)>0$ is an odd number and $\degg(b_2)>0$ is even.
 Let $k_1, k_2 > 0$ denote the numbers of edges which connect
 the vertex $b_1$ with the vertices $w_1, w_2$, respectively. 
 Of course $k_1+k_2=\degg(b_1)$ is an odd number. Without loss of the generality 
 we may assume that $k_1$ is
-even and $k_2$ is odd. The unique map from the
+even and $k_2$ is odd. 
+For example, the unique map from the
 set $X_5$ is shown in \cref{fig:rysodda}.
 
 \subsection{The set $Y_k$ of maps}
 
 We will say that \emph{the vertex $w_j$ is the successor of the vertex
 $w_i$} (we denote it by $w_i \rightarrow w_j$) 
-if using the cyclic order of the corners we
+if using the \todo{clockwise/counterclockwise?} cyclic order of the corners on the unique face of the map
+we
 can move (by walking along the edges and holding them with the right hand)
 in two steps from a certain corner $c_i$ of the vertex $w_i$ to a certain
 corner $c_j$ of the vertex $w_j$, i.e., $\nast^2(c_i)=c_j$. 
@@ -925,7 +952,7 @@ The unique map from the set $T_{5}^{\odd}$ is shown in \cref{fig:rysoddd}. Clear
 \end{equation}
 
 Let $Y_{k}^{\even}\subseteq Y_k$ be the set of maps such that there
-exists an even degree vertex (let us say it is $w_3$) which has the other 
+exists an even degree white vertex (let us say it is $w_3$) which has the other 
 two white vertices as successors, i.e., $w_3\rightarrow w_1$ and $w_3\rightarrow w_2$. 
 Let $T_k^{\even}$ be the set of all the maps from the set $Y_k^{\even}$ with the choice 
 of a vertex $w_3$ with this property.  
@@ -949,8 +976,11 @@ $\rightarrow$ becomes a directed graph which is strongly connected, and each
 white vertex has exactly one outgoing edge to another vertex (and potentially a
 loop). Without  loss  of  generality  we  may  assume  that $w_1 \rightarrow w_2$. Thus $w_2 \rightarrow w_3$, $w_3 \rightarrow w_1$.
 
-We claim that $m$ has a vertex of odd degree, greater than $1$. By contradiction,  suppose this is not the case. The map $m$ has at least one odd degree white vertex,
+\todo[inline]{czytelnikowi będzie łatwiej, jeśli ten cały dowód a contrario zostanie zamknięty w otoczeniu lemma / proof}
+
+We claim that $m$ has a \todo{white?} vertex of odd degree, greater than $1$. By contradiction,  suppose this is not the case. The map $m$ has at least one odd degree white vertex,
 because $\degg(w_1)+\degg(w_2)+\degg(w_3)=k$ is odd. Without loss of generality we may assume that $\degg(w_1)$ is odd. Since $$\degg(w_1)+\degg(w_2)+\degg(w_3)=k>3=1+1+1,$$ %\todo{$>4$ czy $\geq 4$?}
+\todo{czy jest jakieś założenie, że $k>3$?}
 it follows that $\degg(w_1)=1$ and $\degg(w_2),\degg(w_3)$ are even, because $m$
 does not have a white vertex with odd degree greater than $1$. The vertex $w_1$
 has a unique corner $c_1$.
@@ -975,6 +1005,8 @@ It is easy to see that we can replace all edges of the white vertex $w_2$ by a
 single edge and get a map with $4$ vertices, the one face and an even number of
 edges. We get a contradiction, because such maps does not exist. Therefore, the
 map $m$ has white vertex with an odd degree greater than $1$.
+
+\todo{koniec dowodu}
 
 Each corner of the vertex $b$ (inner angle in the vertex $b$ between 
 two neighboring edges of the map $m$) consists two edges $e_1$ and $e_2=\nast(e_1)$
@@ -1086,12 +1118,12 @@ The example of the third bijection for the $5$ edged map.
 \subsection{End of proof}
 Simple calculations give the end the proof
 \begin{align*}
-3[C_2^2]L_k & =3[R_2^2]K_k-[R_4]K_k \tag{by \ref{formula}}\\ 
-& =3|X_k|-|Y_k| \tag{by \ref{xdef},\ref{ydef}}\\ 
-& \geq |T_k^{\odd}|+|T_k^{\even}|+|T_k^{\rest}|-|Y_k| \tag{by \ref{eqodd},
-\ref{eqeven}, \ref{eqrest}}\\ & \geq |Y_k^{\odd}|+|Y_k^{\even}|+|
-Y_k^{\rest}|-|Y_k| \tag{by \ref{ineqodd}, \ref{ineqeven}, \ref{ineqrest}}\\
-& =|Y_k^{\odd} \cap Y_k^{\even}| \tag{by \ref{yrestdef}}\\ 
+3[C_2^2]L_k & =3[R_2^2]K_k-[R_4]K_k \tag{by \eqref{formula}}\\ 
+& =3|X_k|-|Y_k| \tag{by \eqref{xdef}, \eqref{ydef}}\\ 
+& \geq |T_k^{\odd}|+|T_k^{\even}|+|T_k^{\rest}|-|Y_k| \tag{by \eqref{eqodd},
+\eqref{eqeven}, \eqref{eqrest}}\\ & \geq |Y_k^{\odd}|+|Y_k^{\even}|+|
+Y_k^{\rest}|-|Y_k| \tag{by \eqref{ineqodd}, \eqref{ineqeven}, \eqref{ineqrest}}\\
+& =|Y_k^{\odd} \cap Y_k^{\even}| \tag{by \eqref{yrestdef}}\\ 
 & \geq 0.
 \end{align*}
 \printbibliography 
