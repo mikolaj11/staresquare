@@ -982,8 +982,8 @@ We claim that $m$ has a \todo{white?} vertex of odd degree, greater than $1$. By
 because $\degg(w_1)+\degg(w_2)+\degg(w_3)=k$ is odd. Without loss of generality we may assume that $\degg(w_1)$ is odd. Since $$\degg(w_1)+\degg(w_2)+\degg(w_3)=k>3=1+1+1,$$ %\todo{$>4$ czy $\geq 4$?}
 \todo{czy jest jakieś założenie, że $k>3$?}
 it follows that $\degg(w_1)=1$ and $\degg(w_2),\degg(w_3)$ are even, because $m$
-does not have a white vertex with odd degree greater than $1$. The vertex $w_1$
-has a unique corner $c_1$.
+does not have a white vertex with odd degree greater than $1$. The vertex $w_1$ is a leaf and thus
+has a unique corner which we denote by $c_1$.
 
 Naturally $\nast^2(c_1)$ 
 is a corner of the vertex $w_2$. 
@@ -992,29 +992,35 @@ the white vertices which has only one cycle.
 The corners of the white vertices are colored in three colors: $1, 2, 3$
 (according to the names of the vertices they are in).  
 If a corner $c$ has the color $a$, 
-its successor $\nast^2(c)$ has either the color $a$ or $1+a \operatorname{mod} 3$. 
+its successor $\nast^2(c)$ has either the color $a$ or $a+1 \operatorname{mod} 3$. 
 There is only one corner which has the color $1$, so the corner colors 
 (arranged in the cyclic order according to the unique cycle of $\nast^2$) are 
 $(1, 2, \ldots, 2, 3, \ldots, 3)$.
-Since exists only one corner $ c_2 $ of the white vertex $ w_2 $ such 
+Since THERE exists only one corner $ c_2 $ of the white vertex $ w_2 $ such 
 that $ \nast ^ 2 (c_2) $ is the corner of the vertex $ w_3 $, 
-then the clockwise cyclic order of the edges in the black vertex $b$ is as
+then the clockwise cyclic order of the edges around the black vertex $b$ is as
 follows: one edge connected to the vertex $w_1$, a certain number of edges connected
-to the vertex $w_2$, a certain number of edges connected to the vertex $w_3$.
+to the vertex $w_2$, a certain number of edges connected to the vertex $w_3$. \todo{dlaczego?}
 It is easy to see that we can replace all edges of the white vertex $w_2$ by a
 single edge and get a map with $4$ vertices, the one face and an even number of
-edges. We get a contradiction, because such maps does not exist. Therefore, the
+edges. We get a contradiction, because such maps does not exist. \todo{dlaczego?} Therefore, the
 map $m$ has white vertex with an odd degree greater than $1$.
 
 \todo{koniec dowodu}
 
 Each corner of the vertex $b$ (inner angle in the vertex $b$ between 
-two neighboring edges of the map $m$) consists two edges $e_1$ and $e_2=\nast(e_1)$
-which connect this vertex with a some vertex/vertices. Let $T_k^{\rest}$
-be the set of all the maps from the set $Y_k^{\rest}$ with a selected vertex
-denoted by $w_3$ with an odd degree greater than $1$ and his edges decomposition into
-two non-empty, disjoint parts $P_1$ and $P_2$ where $P_1$ has an odd
+two neighboring edges of the map $m$) 
+\todo[inline]{czy bycie rogiem już zostało zdefiniowane wcześniej? czy to jest jakaś nowa definicja? może chcesz powiedzieć, że róg $c=(e_1,e_2)$ to para krawędzi taka, że $e_2=\nast(e_1)$?}
+consists two edges $e_1$ and $e_2=\nast(e_1)$
+\xout{which connect this vertex with a some vertex/vertices}. Let $T_k^{\rest}$
+be the set of all the maps from the set $Y_k^{\rest}$ with a selected WHITE vertex
+denoted by $w_3$ with an odd degree greater than $1$ and a 
+decomposition of its
+\todo{\xout{his} czy wierzchołek jest chłopakiem lub dziewczyną?} 
+edges into
+two non-empty, disjoint parts $P_1$ and $P_2$ such that $P_1$ has an odd
 number of edges. Furthermore, we require that each corner 
+\todo{$c=(e_1,e_2)$?}
 of the vertex $b$ containing two edges connected to the vertex $w_3$ 
 ($e_1$ and $e_2$ are connected with the vertex $w_3$)
 fulfils one of the properties:
@@ -1023,29 +1029,47 @@ fulfils one of the properties:
 \item $e_1, e_2 \in P_2$, 
 \item $e_1 \in P_1, e_2 \in P_2$. 
 \end{itemize}  
-An unique example of the map from the set $T_{5}^{\rest}$ is shown in
-\cref{fig:rysrestd} ($P_1$ has the blue dashed lines in the picture).
+\todo[inline]{pewnie prościej powiedzieć to od strony negatywnej: nie istnieje taki róg, że $e_1\in P_2$ i $e_2\in P_1$.}
+THE unique example of the map from the set $T_{5}^{\rest}$ is shown in
+\cref{fig:rysrestd} ($P_1$ has the blue dashed lines in the picture \todo{a gdzie jest $P_2$?}).
 Clearly
 \begin{align}
 \label{ineqrest}
 |T_{k}^{\rest}| \geq |Y_{k}^{\rest}|.
 \end{align}
+\todo[inline]{dlaczego? dlaczego istnieje co najmniej jeden sposób na wybór $P_1$ i $P_2$?}
 
 \pagebreak[1] 
 
-\section{Proof of main result}
+\section{Proof of main result \cref{???}}
+
+\todo{tak dla pewności: co jest głównym wynikiem, jaki to numer twierdzenia?}
+
+
+\todo[inline]{To miejsce prosi o jakieś spojrzenie z lotu ptaka. Czy
+    skonstruujemy trzy bijekcje, a potem je połączymy przez składanie funkcji? Jaki
+    jest ogólny plan i dokąd zmierzamy?}
+
 \subsection{Three bijections}
-\paragraph{First bijection}
-We consider any map $m$ from the set $X_{k}$. As the set of special edges,
-we select all edges connecting the vertex $b_1$ with the white vertices.
+
+\paragraph{THE first bijection.}
+\todo{Kropka na końcu.}
+We consider any map $m\in X_{k}$. As the set of special edges,
+we select all edges of the vertex $b_1$ \xout{with the white vertices}.
 Each special edge has the selected end in the white vertex and 
 the direction left. We apply the edge sliding on the map $m$.
 Then we change the color of the black vertex $b_1$ to white and
-its name to $w_3$, and the name of vertex $b_2$ to $b$. Of course, the degree of the vertex $w_3$ does not change and is odd. In
+its name to $w_3$, and the name of THE vertex $b_2$ to $b$. Of course, the degree of the vertex $w_3$ does not change and is odd. In
 addition, $w_3$ has two distinct successors $w_1$ and $w_2$ different
-than $w_3$. We received a map
+than $w_3$. 
+\todo{dlaczego?}
+\todo[inline]{To zdanie nie jest jednoznaczne. Nie jest jasne, czy ono mówi, że $w_1$ nie jest swoim własnym następnikiem czy nie.}
+We received 
+\todo[inline]{warto sprawdzić subtelne różnice słownikowe między received and obtained.}
+a map
 from the set $T_k^{\odd}$ with a selected vertex $w_3$. Such
-transformation is a bijection. \cref{fig:rysodd} shows an example of this
+transformation is a bijection. \todo{dlaczego?}
+\cref{fig:rysodd} shows an example of this
 bijection for $k=5$. Thus
 \begin{align}
 \label{eqodd}
@@ -1065,7 +1089,11 @@ The example of the first bijection for the $5$ edged map.
 \label{fig:rysodd}
 \end{figure}
 \vspace{-15pt}
-\paragraph{Second bijection}
+
+
+
+\paragraph{THE second bijection.}
+\todo{kropka}
 We consider any map $m$ from the set $X_{k}$. As the set of special edges,
 we select all edges connecting the vertex $b_2$ with the white vertices.
 Each special edge has the selected end in the white vertex and 
@@ -1085,13 +1113,19 @@ bijection for $k=5$. Thus
 \ryseven{0.95}
 \caption
 {
-\protect\subref{fig:rysevena} - \protect\subref{fig:rysevend} 
+\protect\subref{fig:rysevena}---\protect\subref{fig:rysevend} 
 The example of the second bijection for the $5$ edged map. 
 }
 \label{fig:ryseven}
 \end{figure}
 
-\paragraph{Third bijection}
+\todo[inline]{Na rysunku \cref{fig:rysevena} zamawiam aby był bardziej w stylu
+    \cref{fig:rysevenb}. Niepokoi mnie, że dwie czarne krawędzi są w wersji (a)
+    zaplecione, a w wersji (b) nie. Oczywiście to jest to samo, ale niepotrzebnie
+    wprowadza czytelnika w stan zakłopotania.}
+
+\paragraph{THE Third bijection.}
+\todo{kropka}
 We consider any map $m$ from the set $X_{k}$. As the set of special edges,
 we select all edges connecting the vertex $b_1$ with the white vertices.
 Each special edge has the selected end in the white vertex and
@@ -1115,15 +1149,21 @@ The example of the third bijection for the $5$ edged map.
 \label{fig:rysrest}
 \end{figure}
 
-\subsection{End of proof}
+
+
+\subsection{The conclusion of the proof}
+
+\todo[inline]{Czy można prosić o jakiś human-readable tekst, który wyjaśnia z
+    lotu ptaka co kryje się za tym ciągiem napisów?}
+
 Simple calculations give the end the proof
 \begin{align*}
-3[C_2^2]L_k & =3[R_2^2]K_k-[R_4]K_k \tag{by \eqref{formula}}\\ 
-& =3|X_k|-|Y_k| \tag{by \eqref{xdef}, \eqref{ydef}}\\ 
-& \geq |T_k^{\odd}|+|T_k^{\even}|+|T_k^{\rest}|-|Y_k| \tag{by \eqref{eqodd},
+3[C_2^2]L_k & =3[R_2^2]K_k-[R_4]K_k \tag*{by \eqref{formula}}\\ 
+& =3|X_k|-|Y_k| \tag*{by \eqref{xdef}, \eqref{ydef}}\\ 
+& \geq |T_k^{\odd}|+|T_k^{\even}|+|T_k^{\rest}|-|Y_k| \tag*{by \eqref{eqodd},
 \eqref{eqeven}, \eqref{eqrest}}\\ & \geq |Y_k^{\odd}|+|Y_k^{\even}|+|
-Y_k^{\rest}|-|Y_k| \tag{by \eqref{ineqodd}, \eqref{ineqeven}, \eqref{ineqrest}}\\
-& =|Y_k^{\odd} \cap Y_k^{\even}| \tag{by \eqref{yrestdef}}\\ 
+Y_k^{\rest}|-|Y_k| \tag*{by \eqref{ineqodd}, \eqref{ineqeven}, \eqref{ineqrest}}\\
+& =|Y_k^{\odd} \cap Y_k^{\even}| \tag*{by \eqref{yrestdef}}\\ 
 & \geq 0.
 \end{align*}
 \printbibliography 
